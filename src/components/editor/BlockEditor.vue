@@ -4,11 +4,30 @@ import * as Blockly from 'blockly/core'
 import * as en from 'blockly/msg/en'
 import 'blockly/blocks'
 import {useEditorPreferences} from "../../script/EditorPreferences.ts";
+import {CoreBlocks} from "../../script/editor/blocks/CoreBlocks.ts";
+import {Categories} from "../../script/editor/Categories.ts";
+import type {ToolboxDefinition} from "blockly/core/utils/toolbox";
+import {M5StackBlocks} from "../../script/editor/blocks/M5StackBlocks.ts";
 
 const editorPrefs = useEditorPreferences();
 
 const blockEditor = ref<HTMLElement>();
 const workspace = ref<Blockly.WorkspaceSvg | null>();
+
+function initializeToolbox(): ToolboxDefinition {
+  const categories = Categories.asToolboxContent();
+  initializeBlocks();
+
+  return {
+    kind: "categoryToolbox",
+    contents: categories
+  }
+}
+
+function initializeBlocks() {
+  CoreBlocks.INSTANCE.register();
+  M5StackBlocks.INSTANCE.register();
+}
 
 watch(() => editorPrefs.dividerPos, () => {
   if (!workspace.value)
@@ -25,50 +44,17 @@ onMounted(() => {
 
   const editorOptions: Blockly.BlocklyOptions = {
     grid: {
-      spacing: 25,
-      length: 1,
-      colour: '#ccc',
+      spacing: 50,
+      length: 2,
+      colour: '#bbb',
       snap: true,
     },
     move: {
       drag: true,
       scrollbars: true,
     },
-    trashcan: false,
-    toolbox: {
-      kind: "categoryToolbox",
-      contents: [
-        {
-          kind: "category",
-          name: "Control",
-          contents: [
-            {
-              kind: "block",
-              type: "controls_if"
-            },
-          ]
-        },
-        {
-          kind: "category",
-          name: "Logic",
-          categorystyle: "logic_category",
-          contents: [
-            {
-              kind: "block",
-              type: "logic_compare"
-            },
-            {
-              kind: "block",
-              type: "logic_operation"
-            },
-            {
-              kind: "block",
-              type: "logic_boolean"
-            }
-          ]
-        }
-      ]
-    }
+    trashcan: true,
+    toolbox: initializeToolbox()
   }
 
   workspace.value = Blockly.inject(blockEditor.value, editorOptions);
