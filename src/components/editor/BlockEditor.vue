@@ -1,10 +1,21 @@
 <script setup lang="ts">
-import { ref, onMounted} from 'vue'
+import {ref, onMounted, computed, watch} from 'vue'
 import * as Blockly from 'blockly/core'
 import * as en from 'blockly/msg/en'
 import 'blockly/blocks'
+import {useEditorPreferences} from "../../script/EditorPreferences.ts";
+
+const editorPrefs = useEditorPreferences();
 
 const blockEditor = ref<HTMLElement>();
+const workspace = ref<Blockly.WorkspaceSvg | null>();
+
+watch(() => editorPrefs.dividerPos, () => {
+  if (!workspace.value)
+    return;
+
+  Blockly.svgResize(workspace.value);
+});
 
 onMounted(() => {
   if (!blockEditor.value)
@@ -60,8 +71,9 @@ onMounted(() => {
     }
   }
 
-  Blockly.inject(blockEditor.value, editorOptions);
+  workspace.value = Blockly.inject(blockEditor.value, editorOptions);
 })
+
 </script>
 
 <template>
