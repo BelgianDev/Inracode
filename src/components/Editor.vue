@@ -2,14 +2,14 @@
 import { NSplit } from 'naive-ui';
 import BlockEditor from "./editor/BlockEditor.vue";
 import CodeViewer from "./editor/CodeViewer.vue";
-import {useEditorPreferences} from "../script/EditorPreferences.ts";
+import {useEditorStore} from "../script/editor/EditorStore.ts";
 
-const editorPrefs = useEditorPreferences();
+const editorStore = useEditorStore();
 
 </script>
 
 <template>
-  <n-split direction="horizontal" id="editor-split" v-model:size="editorPrefs.dividerPos" :min="0.5" :max="0.8">
+  <n-split direction="horizontal" id="editor-split" v-model:size="editorStore.dividerPos" :min="0.5" :max="0.8">
     <template #1>
       <BlockEditor/>
     </template>

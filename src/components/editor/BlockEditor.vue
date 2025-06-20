@@ -3,20 +3,21 @@ import {ref, onMounted, computed, watch} from 'vue'
 import * as Blockly from 'blockly/core'
 import * as en from 'blockly/msg/en'
 import 'blockly/blocks'
-import {useEditorPreferences} from "../../script/EditorPreferences.ts";
-import {CoreBlocks} from "../../script/editor/blocks/CoreBlocks.ts";
+import {useEditorStore} from "../../script/editor/EditorStore.ts";
 import {Categories} from "../../script/editor/Categories.ts";
 import type {ToolboxDefinition} from "blockly/core/utils/toolbox";
-import {M5StackBlocks} from "../../script/editor/blocks/M5StackBlocks.ts";
+import {registerBlocks} from "../../script/editor/BlockRegistry.ts";
+import type {Abstract} from "blockly/core/events/events_abstract";
+import {cppGenerator} from "../../script/editor/CPPGenerator.ts";
 
-const editorPrefs = useEditorPreferences();
+const editorStore = useEditorStore();
 
 const blockEditor = ref<HTMLElement>();
 const workspace = ref<Blockly.WorkspaceSvg | null>();
 
 function initializeToolbox(): ToolboxDefinition {
   const categories = Categories.asToolboxContent();
-  initializeBlocks();
+  registerBlocks();
 
   return {
     kind: "categoryToolbox",
@@ -24,12 +25,25 @@ function initializeToolbox(): ToolboxDefinition {
   }
 }
 
-function initializeBlocks() {
-  CoreBlocks.INSTANCE.register();
-  M5StackBlocks.INSTANCE.register();
+const eventForCodeRegen = new Set([
+  Blockly.Events.BLOCK_CHANGE,
+  Blockly.Events.BLOCK_CREATE,
+  Blockly.Events.BLOCK_DELETE,
+  Blockly.Events.BLOCK_MOVE,
+]);
+
+async function generateCode(event: Abstract) {
+  if (!workspace.value || !eventForCodeRegen.has(event.type))
+    return;
+
+  if (workspace.value.isDragging())
+    return;
+
+  console.log("Generating code...");
+  editorStore.code = cppGenerator.workspaceToCode(workspace.value);
 }
 
-watch(() => editorPrefs.dividerPos, () => {
+watch(() => editorStore.dividerPos, () => {
   if (!workspace.value)
     return;
 
@@ -44,9 +58,9 @@ onMounted(() => {
 
   const editorOptions: Blockly.BlocklyOptions = {
     grid: {
-      spacing: 50,
+      spacing: 25,
       length: 2,
-      colour: '#bbb',
+      colour: '#fff',
       snap: true,
     },
     move: {
@@ -58,6 +72,7 @@ onMounted(() => {
   }
 
   workspace.value = Blockly.inject(blockEditor.value, editorOptions);
+  workspace.value.addChangeListener(generateCode);
 })
 
 </script>

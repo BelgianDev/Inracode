@@ -1,22 +1,14 @@
 <script setup lang="ts">
 import { NCode, NSpace } from 'naive-ui';
+import {useEditorStore} from "../../script/editor/EditorStore.ts";
 
-const code = `
-#include <M5Stack.h>
+const editorStore = useEditorStore();
 
-void setup() {
-     M5.begin();
-}
-
-void loop() {
-
-}
-`
 </script>
 
 <template>
   <div style="margin: 15px">
-    <n-code show-line-numbers language="cpp" :code="code">
+    <n-code show-line-numbers language="cpp" :code="editorStore.code">
 
     </n-code>
   </div>

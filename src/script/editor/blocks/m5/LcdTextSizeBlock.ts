@@ -1,0 +1,37 @@
+import {CodeBlock} from "../../CodeBlock.ts";
+import * as Blockly from "blockly";
+import type {CategoryInfo} from "blockly/core/utils/toolbox";
+import {Categories} from "../../Categories.ts";
+import type {BlockDefinition} from "blockly/core/blocks";
+
+const SIZE = "SIZE";
+
+export class LcdTextSizeBlock extends CodeBlock {
+    protected identifier(): string {
+        return "m5-lcd-size";
+    }
+
+    protected category(): CategoryInfo {
+        return Categories.M5STACK;
+    }
+
+    protected definition(): BlockDefinition {
+        return {
+            init: function () {
+                this.appendDummyInput('')
+                    .appendField('Set LCD text size ')
+                    .appendField(new Blockly.FieldNumber(1), SIZE)
+                this.setPreviousStatement(true, null);
+                this.setNextStatement(true, null);
+                this.setTooltip('');
+                this.setHelpUrl('');
+            }
+        }
+    }
+
+    protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
+        const size = block.getFieldValue(SIZE);
+
+        return "M5.Lcd.setTextSize(" + size + ");";
+    }
+}
