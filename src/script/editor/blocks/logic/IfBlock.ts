@@ -21,8 +21,7 @@ export class IfBlock extends StandardBlock {
         let count = 0;
         let code = '';
 
-        let condition;
-        while ((condition = block.getInput(IF_MEMBER + count)) !== null) {
+        while (block.getInput(IF_MEMBER + count) !== null) {
             const conditionCode = generator.valueToCode(block, IF_MEMBER + count, Order.NONE);
             const statementCode = generator.statementToCode(block, DO_MEMBER + count);
 

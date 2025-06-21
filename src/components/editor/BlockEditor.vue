@@ -73,6 +73,7 @@ onMounted(() => {
 
   workspace.value = Blockly.inject(blockEditor.value, editorOptions);
   workspace.value.addChangeListener(generateCode);
+  workspace.value.addChangeListener(Blockly.Events.disableOrphans);
 })
 
 </script>

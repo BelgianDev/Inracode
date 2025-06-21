@@ -1,7 +1,5 @@
 import type {CodeBlock} from "./CodeBlock.ts";
 
-import * as Blockly from 'blockly';
-
 import {CompareBlock} from "./blocks/logic/CompareBlock.ts";
 import {IfBlock} from "./blocks/logic/IfBlock.ts";
 import {DefineVariableBlock} from "./blocks/variable/DefineVariableBlock.ts";
