@@ -20,7 +20,7 @@ export class DefineBlock extends CodeBlock {
         return {
             init: function () {
                 this.appendDummyInput('')
-                    .appendField('Define')
+                    .appendField('define')
                     .appendField(new Blockly.FieldTextInput('CONSTANT'), VAR_NAME)
                     .appendField('as')
                     .appendField(new Blockly.FieldTextInput(''), VAR_VALUE);

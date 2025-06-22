@@ -16,7 +16,7 @@ export class BeginBlock extends CodeBlock {
     protected definition(): BlockDefinition {
         return {
             init: function () {
-                this.appendDummyInput('').appendField('Start the M5Stack');
+                this.appendDummyInput('').appendField('start the M5Stack');
                 this.setPreviousStatement(true, null);
                 this.setNextStatement(true, null);
                 this.setTooltip('');

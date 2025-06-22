@@ -18,7 +18,7 @@ export class SetupBlock extends CodeBlock {
     protected definition(): BlockDefinition {
         return {
             init: function () {
-                this.appendDummyInput().appendField('Setup');
+                this.appendDummyInput().appendField('setup');
                 this.appendStatementInput(MEMBERS)
                 this.appendEndRowInput();
             }

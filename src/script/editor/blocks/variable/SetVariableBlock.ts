@@ -4,26 +4,26 @@ import type {CategoryInfo} from "blockly/core/utils/toolbox";
 import {Categories} from "../../Categories.ts";
 import type {BlockDefinition} from "blockly/core/blocks";
 
-const X = "X";
-const Y = "Y";
+const VAR_NAME = "VAR_NAME";
+const VAR_VALUE = "VAR_VALUE";
 
-export class LcdCursorBlock extends CodeBlock {
+export class SetVariableBlock extends CodeBlock {
     protected identifier(): string {
-        return "m5-lcd-cursor";
+        return "var-set";
     }
 
     protected category(): CategoryInfo {
-        return Categories.M5STACK;
+        return Categories.VARIABLE;
     }
 
     protected definition(): BlockDefinition {
         return {
             init: function () {
                 this.appendDummyInput('')
-                    .appendField('move LCD cursor to X:')
-                    .appendField(new Blockly.FieldNumber(0), X)
-                    .appendField('Y:')
-                    .appendField(new Blockly.FieldNumber(0), Y);
+                    .appendField('set')
+                    .appendField(new Blockly.FieldTextInput('variable'), VAR_NAME)
+                    .appendField('to')
+                    .appendField(new Blockly.FieldTextInput(''), VAR_VALUE);
                 this.setPreviousStatement(true, null);
                 this.setNextStatement(true, null);
                 this.setTooltip('');
@@ -33,9 +33,13 @@ export class LcdCursorBlock extends CodeBlock {
     }
 
     protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
-        const x = block.getFieldValue(X);
-        const y = block.getFieldValue(Y);
+        const name = block.getFieldValue(VAR_NAME);
+        const value = block.getFieldValue(VAR_VALUE);
 
-        return "M5.Lcd.setCursor(" + x + ", " + y + ");";
+        if (isNaN(Number(value)) && value !== 'true' && value !== 'false') {
+            return name + ' = "' + value + '";';
+        }
+
+        return name + " = " + value + ";";
     }
 }

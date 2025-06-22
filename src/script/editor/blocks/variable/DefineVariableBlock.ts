@@ -21,7 +21,7 @@ export class DefineVariableBlock extends CodeBlock {
         return {
             init: function () {
                 this.appendDummyInput('')
-                    .appendField('Define variable')
+                    .appendField('define variable')
                     .appendField(new Blockly.FieldTextInput('variable'), VAR_NAME)
                     .appendField('of type')
                     .appendField(new Blockly.FieldDropdown([

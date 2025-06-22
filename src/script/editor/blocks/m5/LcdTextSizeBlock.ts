@@ -19,7 +19,7 @@ export class LcdTextSizeBlock extends CodeBlock {
         return {
             init: function () {
                 this.appendDummyInput('')
-                    .appendField('Set LCD text size ')
+                    .appendField('set LCD text size ')
                     .appendField(new Blockly.FieldNumber(1), SIZE)
                 this.setPreviousStatement(true, null);
                 this.setNextStatement(true, null);

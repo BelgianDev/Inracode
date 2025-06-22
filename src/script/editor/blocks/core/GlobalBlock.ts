@@ -19,7 +19,7 @@ export class GlobalBlock extends CodeBlock {
     protected definition(): BlockDefinition {
         return {
             init: function () {
-                this.appendDummyInput().appendField('Global');
+                this.appendDummyInput().appendField('global');
                 this.appendStatementInput(MEMBERS)
                 this.appendEndRowInput();
             }

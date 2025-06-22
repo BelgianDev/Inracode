@@ -19,7 +19,7 @@ export class LcdPrintBlock extends CodeBlock {
         return {
             init: function () {
                 this.appendDummyInput('')
-                    .appendField('Print ')
+                    .appendField('print ')
                     .appendField(new Blockly.FieldTextInput('text'), INPUT)
                     .appendField('to LCD screen.')
                 this.setPreviousStatement(true, null);

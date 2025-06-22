@@ -13,6 +13,8 @@ import {LcdTextSizeBlock} from "./blocks/m5/LcdTextSizeBlock.ts";
 import {LcdPrintBlock} from "./blocks/m5/LcdPrintBlock.ts";
 import {DefineBlock} from "./blocks/core/DefineBlock.ts";
 import {NumberBlock} from "./blocks/math/CompareBlock.ts";
+import {GetVariableBlock} from "./blocks/variable/GetVariableBlock.ts";
+import {SetVariableBlock} from "./blocks/variable/SetVariableBlock.ts";
 
 const REGISTERED_BLOCKS: CodeBlock[] = [
     // Core
@@ -31,6 +33,8 @@ const REGISTERED_BLOCKS: CodeBlock[] = [
 
     // Variable
     new DefineVariableBlock(),
+    new SetVariableBlock(),
+    new GetVariableBlock(),
 
     // M5
     new BeginBlock(),

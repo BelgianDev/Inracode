@@ -18,7 +18,7 @@ export class LoopBlock extends CodeBlock {
     protected definition(): BlockDefinition {
         return {
             init: function () {
-                this.appendDummyInput().appendField('Loop');
+                this.appendDummyInput().appendField('loop');
                 this.appendStatementInput(MEMBERS)
                 this.appendEndRowInput();
             }

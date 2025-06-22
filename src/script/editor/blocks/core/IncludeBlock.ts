@@ -19,7 +19,7 @@ export class IncludeBlock extends CodeBlock {
         return {
             init: function () {
                 this.appendDummyInput('')
-                    .appendField('Include')
+                    .appendField('include')
                     .appendField(new Blockly.FieldTextInput('M5Stack.h'), INCLUDE_PATH);
                 this.setPreviousStatement(true, null);
                 this.setNextStatement(true, null);
