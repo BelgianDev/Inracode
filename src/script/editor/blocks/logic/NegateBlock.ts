@@ -4,19 +4,22 @@ import * as Blockly from 'blockly';
 import {Categories} from "../../Categories.ts";
 import {Order} from "blockly/javascript";
 
-const NUM = "NUM";
+const STATEMENT = "BOOL";
 
-export class NumberBlock extends StandardBlock {
+export class NegateBlock extends StandardBlock {
     protected identifier(): string {
-        return "math_number";
+        return "logic_negate";
     }
 
     protected category(): CategoryInfo {
-        return Categories.MATH;
+        return Categories.LOGIC;
     }
 
     protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
-        return [block.getFieldValue(NUM), Order.NONE];
+        const condition = generator.valueToCode(block, STATEMENT, Order.NONE);
+
+        const code = "!(" + condition + ")";
+        return [code, Order.NONE]
     }
 
 }

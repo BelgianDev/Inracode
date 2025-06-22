@@ -12,9 +12,13 @@ import {LcdCursorBlock} from "./blocks/m5/LcdCursorBlock.ts";
 import {LcdTextSizeBlock} from "./blocks/m5/LcdTextSizeBlock.ts";
 import {LcdPrintBlock} from "./blocks/m5/LcdPrintBlock.ts";
 import {DefineBlock} from "./blocks/core/DefineBlock.ts";
-import {NumberBlock} from "./blocks/math/CompareBlock.ts";
+import {NumberBlock} from "./blocks/variable/NumberBlock.ts"
 import {GetVariableBlock} from "./blocks/variable/GetVariableBlock.ts";
 import {SetVariableBlock} from "./blocks/variable/SetVariableBlock.ts";
+import {OperationBlock} from "./blocks/logic/OperationBlock.ts";
+import {BooleanBlock} from "./blocks/variable/BooleanBlock.ts";
+import {NegateBlock} from "./blocks/logic/NegateBlock.ts";
+import {NullBlock} from "./blocks/variable/NullBlock.ts";
 
 const REGISTERED_BLOCKS: CodeBlock[] = [
     // Core
@@ -25,16 +29,18 @@ const REGISTERED_BLOCKS: CodeBlock[] = [
     new GlobalBlock(),
 
     // Logic
+    new NegateBlock(),
     new CompareBlock(),
+    new OperationBlock(),
     new IfBlock(),
 
-    // Math
-    new NumberBlock(),
-
     // Variable
+    new NullBlock(),
+    new GetVariableBlock(),
+    new NumberBlock(),
+    new BooleanBlock(),
     new DefineVariableBlock(),
     new SetVariableBlock(),
-    new GetVariableBlock(),
 
     // M5
     new BeginBlock(),

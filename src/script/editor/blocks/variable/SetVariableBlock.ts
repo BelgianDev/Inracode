@@ -37,8 +37,14 @@ export class SetVariableBlock extends CodeBlock {
         const value = block.getFieldValue(VAR_VALUE);
 
         if (isNaN(Number(value)) && value !== 'true' && value !== 'false') {
+            if (value.startsWith('"') && value.endsWith('"')) {
+                return name + " = " + value + ";";
+            }
+
             return name + ' = "' + value + '";';
         }
+
+
 
         return name + " = " + value + ";";
     }
