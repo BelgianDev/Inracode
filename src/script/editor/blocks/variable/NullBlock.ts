@@ -14,7 +14,7 @@ export class NullBlock extends StandardBlock {
     }
 
     protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
-        return ['null', Order.NONE];
+        return ['NULL', Order.NONE];
     }
 
 }
