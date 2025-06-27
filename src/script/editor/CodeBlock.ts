@@ -1,6 +1,6 @@
 import 'blockly/blocks'
 import * as Blockly from "blockly";
-import type {CategoryInfo} from "blockly/core/utils/toolbox";
+import type {CategoryInfo, ToolboxItemInfo} from "blockly/core/utils/toolbox";
 import type {BlockDefinition} from "blockly/core/blocks";
 import {cppGenerator} from "./CPPGenerator.ts";
 
@@ -34,6 +34,8 @@ export abstract class CodeBlock {
         const category = this.category();
         const def = this.definition();
 
+        const alreadyRegistered = Blockly.Blocks[identifier] !== undefined;
+
         const defInit = def.init;
         def.init = function (this: Blockly.Block) {
             defInit.call(this);
@@ -42,6 +44,15 @@ export abstract class CodeBlock {
 
         Blockly.Blocks[identifier] = def;
         cppGenerator.forBlock[identifier] = (block, generator) => this.generateCode(block, generator);
+
+        const isInCategory = category.contents?.some(
+            (item: ToolboxItemInfo) => item.kind === 'block' && item.type === identifier
+        );
+
+        if (isInCategory) { // Prevent the block from being registered twice to the toolbox when vite is reloading
+            console.warn(`Block with identifier ${identifier} is already in the category.`);
+            return;
+        }
 
         if (!category.contents)
             category.contents = [];

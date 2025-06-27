@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref, onMounted, computed, watch} from 'vue'
+import {ref, onMounted, watch} from 'vue'
 import * as Blockly from 'blockly/core'
 import * as en from 'blockly/msg/en'
 import 'blockly/blocks'
@@ -32,7 +32,7 @@ const eventForCodeRegen = new Set([
   Blockly.Events.BLOCK_MOVE,
 ]);
 
-async function generateCode(event: Abstract) {
+async function generateCode(event?: Abstract) {
   if (!workspace.value || !eventForCodeRegen.has(event.type))
     return;
 
