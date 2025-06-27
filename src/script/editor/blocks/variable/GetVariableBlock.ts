@@ -20,7 +20,6 @@ export class GetVariableBlock extends CodeBlock {
         return {
             init: function () {
                 this.appendDummyInput('')
-                    .appendField('get')
                     .appendField(new Blockly.FieldTextInput('variable'), VAR_NAME);
                 this.setOutput(true, null);
                 this.setTooltip('');

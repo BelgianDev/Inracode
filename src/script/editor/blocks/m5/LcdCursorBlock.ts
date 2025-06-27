@@ -3,6 +3,7 @@ import * as Blockly from "blockly";
 import type {CategoryInfo} from "blockly/core/utils/toolbox";
 import {Categories} from "../../Categories.ts";
 import type {BlockDefinition} from "blockly/core/blocks";
+import {Order} from "blockly/javascript";
 
 const X = "X";
 const Y = "Y";
@@ -19,11 +20,14 @@ export class LcdCursorBlock extends CodeBlock {
     protected definition(): BlockDefinition {
         return {
             init: function () {
-                this.appendDummyInput('')
-                    .appendField('move LCD cursor to X:')
-                    .appendField(new Blockly.FieldNumber(0), X)
-                    .appendField('Y:')
-                    .appendField(new Blockly.FieldNumber(0), Y);
+                this.appendValueInput(X)
+                    .setCheck('Number')
+                    .appendField('set LCD cursor to')
+                    .appendField('X:');
+                this.appendValueInput(Y)
+                    .setCheck('Number')
+                    .appendField('Y:');
+                this.setInputsInline(true)
                 this.setPreviousStatement(true, null);
                 this.setNextStatement(true, null);
                 this.setTooltip('');
@@ -33,8 +37,8 @@ export class LcdCursorBlock extends CodeBlock {
     }
 
     protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
-        const x = block.getFieldValue(X);
-        const y = block.getFieldValue(Y);
+        const x = generator.valueToCode(block, X, Order.NONE);
+        const y = generator.valueToCode(block, Y, Order.NONE);
 
         return "M5.Lcd.setCursor(" + x + ", " + y + ");";
     }

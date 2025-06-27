@@ -3,6 +3,7 @@ import * as Blockly from "blockly";
 import type {CategoryInfo} from "blockly/core/utils/toolbox";
 import {Categories} from "../../Categories.ts";
 import type {BlockDefinition} from "blockly/core/blocks";
+import {Order} from "blockly/javascript";
 
 const VAR_NAME = "VAR_NAME";
 const VAR_TYPE = "VAR_TYPE";
@@ -20,7 +21,7 @@ export class DefineVariableBlock extends CodeBlock {
     protected definition(): BlockDefinition {
         return {
             init: function () {
-                this.appendDummyInput('')
+                this.appendValueInput(VAR_VALUE)
                     .appendField('define variable')
                     .appendField(new Blockly.FieldTextInput('variable'), VAR_NAME)
                     .appendField('of type')
@@ -37,7 +38,6 @@ export class DefineVariableBlock extends CodeBlock {
                         ['Double', 'double']
                     ]), VAR_TYPE)
                     .appendField('as')
-                    .appendField(new Blockly.FieldTextInput(''), VAR_VALUE);
                 this.setPreviousStatement(true, null);
                 this.setNextStatement(true, null);
                 this.setTooltip('');
@@ -49,7 +49,7 @@ export class DefineVariableBlock extends CodeBlock {
     protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
         const name = block.getFieldValue(VAR_NAME);
         const type = block.getFieldValue(VAR_TYPE);
-        const value = block.getFieldValue(VAR_VALUE);
+        const value = generator.valueToCode(block, VAR_VALUE, Order.NONE);
 
         if (!value || value.length === 0)
             return type + ' ' + name + ';';

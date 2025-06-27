@@ -19,6 +19,7 @@ import {OperationBlock} from "./blocks/logic/OperationBlock.ts";
 import {BooleanBlock} from "./blocks/variable/BooleanBlock.ts";
 import {NegateBlock} from "./blocks/logic/NegateBlock.ts";
 import {NullBlock} from "./blocks/variable/NullBlock.ts";
+import {TextBlock} from "./blocks/variable/TextBlock.ts";
 
 const REGISTERED_BLOCKS: CodeBlock[] = [
     // Core
@@ -36,9 +37,10 @@ const REGISTERED_BLOCKS: CodeBlock[] = [
 
     // Variable
     new NullBlock(),
-    new GetVariableBlock(),
     new NumberBlock(),
     new BooleanBlock(),
+    new TextBlock(),
+    new GetVariableBlock(),
     new DefineVariableBlock(),
     new SetVariableBlock(),
 

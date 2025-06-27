@@ -3,6 +3,7 @@ import * as Blockly from "blockly";
 import type {CategoryInfo} from "blockly/core/utils/toolbox";
 import {Categories} from "../../Categories.ts";
 import type {BlockDefinition} from "blockly/core/blocks";
+import {Order} from "blockly/javascript";
 
 const SIZE = "SIZE";
 
@@ -18,9 +19,8 @@ export class LcdTextSizeBlock extends CodeBlock {
     protected definition(): BlockDefinition {
         return {
             init: function () {
-                this.appendDummyInput('')
+                this.appendValueInput(SIZE)
                     .appendField('set LCD text size ')
-                    .appendField(new Blockly.FieldNumber(1), SIZE)
                 this.setPreviousStatement(true, null);
                 this.setNextStatement(true, null);
                 this.setTooltip('');
@@ -30,7 +30,7 @@ export class LcdTextSizeBlock extends CodeBlock {
     }
 
     protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
-        const size = block.getFieldValue(SIZE);
+        const size = generator.valueToCode(block, SIZE, Order.NONE);
 
         return "M5.Lcd.setTextSize(" + size + ");";
     }

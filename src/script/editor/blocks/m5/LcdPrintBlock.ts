@@ -3,6 +3,7 @@ import * as Blockly from "blockly";
 import type {CategoryInfo} from "blockly/core/utils/toolbox";
 import {Categories} from "../../Categories.ts";
 import type {BlockDefinition} from "blockly/core/blocks";
+import {Order} from "blockly/javascript";
 
 const INPUT = "INPUT";
 
@@ -18,10 +19,11 @@ export class LcdPrintBlock extends CodeBlock {
     protected definition(): BlockDefinition {
         return {
             init: function () {
+                this.appendValueInput(INPUT)
+                    .appendField('print')
                 this.appendDummyInput('')
-                    .appendField('print ')
-                    .appendField(new Blockly.FieldTextInput('text'), INPUT)
-                    .appendField('to LCD screen.')
+                    .appendField('to LCD screen.');
+                this.setInputsInline(true)
                 this.setPreviousStatement(true, null);
                 this.setNextStatement(true, null);
                 this.setTooltip('');
@@ -31,8 +33,8 @@ export class LcdPrintBlock extends CodeBlock {
     }
 
     protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
-        const input = block.getFieldValue(INPUT);
+        const input = generator.valueToCode(block, INPUT, Order.NONE);
 
-        return 'M5.Lcd.print("' +  input + '");';
+        return 'M5.Lcd.print(' +  input + ');';
     }
 }
