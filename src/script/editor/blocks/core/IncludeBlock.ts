@@ -33,6 +33,6 @@ export class IncludeBlock extends CodeBlock {
     protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
         const path = block.getFieldValue(INCLUDE_PATH);
 
-        return "#include <" + path + ">;";
+        return "#include <" + path + ">";
     }
 }
