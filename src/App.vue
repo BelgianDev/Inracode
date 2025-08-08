@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NConfigProvider } from 'naive-ui';
+import { NConfigProvider, NDialogProvider, NModalProvider } from 'naive-ui';
 import Editor from "./components/Editor.vue";
 import TopBar from "./components/TopBar.vue";
 
@@ -12,8 +12,12 @@ hljs.registerLanguage('cpp', cpp);
 
 <template>
   <n-config-provider :hljs="hljs">
-    <TopBar/>
-    <Editor/>
+    <n-modal-provider>
+      <n-dialog-provider>
+        <TopBar/>
+        <Editor/>
+      </n-dialog-provider>
+    </n-modal-provider>
   </n-config-provider>
 </template>
 

@@ -11,9 +11,7 @@ import type {Abstract} from "blockly/core/events/events_abstract";
 import {cppGenerator} from "../../script/editor/CPPGenerator.ts";
 
 const editorStore = useEditorStore();
-
 const blockEditor = ref<HTMLElement>();
-const workspace = ref<Blockly.WorkspaceSvg | null>();
 
 function initializeToolbox(): ToolboxDefinition {
   const categories = Categories.asToolboxContent();
@@ -32,22 +30,23 @@ const eventForCodeRegen = new Set([
   Blockly.Events.BLOCK_MOVE,
 ]);
 
+// LET TYPESCRIPT SCREAM, WANT TO HEAR IT CRY
 async function generateCode(event?: Abstract) {
-  if (!workspace.value || !eventForCodeRegen.has(event.type))
+  if (!editorStore.workspace || !eventForCodeRegen.has(event.type))
     return;
 
-  if (workspace.value.isDragging())
+  if (editorStore.workspace.isDragging())
     return;
 
   console.log("Generating code...");
-  editorStore.code = cppGenerator.workspaceToCode(workspace.value);
+  editorStore.code = cppGenerator.workspaceToCode(editorStore.workspace);
 }
 
 watch(() => editorStore.dividerPos, () => {
-  if (!workspace.value)
+  if (!editorStore.workspace)
     return;
 
-  Blockly.svgResize(workspace.value);
+  Blockly.svgResize(editorStore.workspace);
 });
 
 onMounted(() => {
@@ -71,9 +70,9 @@ onMounted(() => {
     toolbox: initializeToolbox()
   }
 
-  workspace.value = Blockly.inject(blockEditor.value, editorOptions);
-  workspace.value.addChangeListener(generateCode);
-  workspace.value.addChangeListener(Blockly.Events.disableOrphans);
+  editorStore.workspace = Blockly.inject(blockEditor.value, editorOptions);
+  editorStore.workspace.addChangeListener(generateCode);
+  editorStore.workspace.addChangeListener(Blockly.Events.disableOrphans);
 })
 
 </script>
