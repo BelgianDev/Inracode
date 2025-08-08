@@ -12,7 +12,7 @@ import {
   FileShredder as ClearIcon,
   Menu2 as MenuIcon
 } from '@vicons/tabler'
-import {ref, watch} from "vue";
+import {ref} from "vue";
 import type {ProjectFile} from "../script/editor/format/ProjectFile.ts";
 
 const editorStore = useEditorStore();
@@ -20,6 +20,7 @@ const dialog = useDialog();
 
 const showImportModal = ref(false);
 const importedFile = ref<ProjectFile | null>(null);
+const showInvalidFileAlert = ref(false);
 
 const codeCopied = ref(false);
 async function onCopyClick() {
@@ -74,6 +75,7 @@ function clearProject() {
 
 async function handleProjectUpload(fileList: Array<{ file: File }>) {
   if (fileList.length === 0) {
+    showInvalidFileAlert.value = false;
     return;
   }
 
@@ -84,6 +86,8 @@ async function handleProjectUpload(fileList: Array<{ file: File }>) {
     importedFile.value = JSON.parse(text);
   } catch (error) {
     console.error('Error processing file:', error);
+    showInvalidFileAlert.value = true;
+    importedFile.value = null;
   }
 }
 
@@ -160,8 +164,11 @@ function formatDate(dateString: string): string {
   </n-float-button>
   <n-modal v-model:show="showImportModal">
     <n-card style="width: 900px" title="Import Project" :bordered="false" size="huge" role="dialog" aria-modal="true">
-      <n-alert class="status-card" title="Warning!" :type="'warning'">
+      <n-alert v-if="!showInvalidFileAlert" title="Warning!" :type="'warning'">
         This operation will replace the current project, and everything will be lost!
+      </n-alert>
+      <n-alert v-else title="Invalid file!" :type="'error'">
+        The file you tried to import is invalid or corrupted.
       </n-alert>
       <n-divider/>
       <n-upload :multiple="false" :max="1" default-upload accept=".code" :on-update-file-list="handleProjectUpload">
@@ -179,7 +186,7 @@ function formatDate(dateString: string): string {
           </n-p>
         </n-upload-dragger>
       </n-upload>
-      <n-divider/>
+      <n-divider v-if="importedFile" />
       <n-descriptions v-if="importedFile">
         <n-descriptions-item>
           <template #label>
@@ -207,6 +214,6 @@ function formatDate(dateString: string): string {
 
 <style scoped>
 #editor-split {
-  height: calc(100vh - 64px);
+  height: 100vh
 }
 </style>
