@@ -2,6 +2,9 @@ import { defineStore } from 'pinia';
 import {ref} from "vue";
 import {Workspace, serialization, getMainWorkspace} from "blockly";
 import type {ProjectFile} from "./format/ProjectFile.ts";
+import * as IDB from "../idb.ts";
+
+const WORKSPACE_IDENTIFIER = "workspace";
 
 export const useEditorStore = defineStore('editor-prefs', ()  => {
     const dividerPos = ref<number>(0.7);
@@ -18,7 +21,7 @@ export const useEditorStore = defineStore('editor-prefs', ()  => {
     }
 
     function exportWorkspace(): ProjectFile {
-        const data: any = serialization.workspaces.save(workspace.value)
+        const data: any = serializeWorkspace();
         const exportDate = new Date().toISOString();
 
         return {
@@ -35,6 +38,26 @@ export const useEditorStore = defineStore('editor-prefs', ()  => {
         serialization.workspaces.load(data, getMainWorkspace()) // Quick Patch: getMainWorkspace works while getting the ref doesn't, why ? I don't know. -> https://github.com/google/blockly/issues/7055
     }
 
+    async function serializeWorkspace(): Promise<any> {
+        return serialization.workspaces.save(workspace.value)
+    }
+
+    async function loadSavedWorkspace() {
+        if (!workspace.value)
+            return
+
+        const serializedWorkspace = await IDB.loadWorkspace(WORKSPACE_IDENTIFIER);
+        serialization.workspaces.load(serializedWorkspace, getMainWorkspace())
+    }
+
+    async function saveWorkspace() {
+        if (!workspace.value)
+            return
+
+        const serializedWorkspace = await serializeWorkspace();
+        await IDB.saveWorkspace(WORKSPACE_IDENTIFIER, serializedWorkspace);
+    }
+
     return {
         dividerPos,
         code,
@@ -42,6 +65,9 @@ export const useEditorStore = defineStore('editor-prefs', ()  => {
 
         clearEditor,
         exportWorkspace,
-        importWorkspace
+        importWorkspace,
+
+        loadSavedWorkspace,
+        saveWorkspace
     }
 });

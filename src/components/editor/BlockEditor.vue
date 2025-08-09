@@ -40,6 +40,7 @@ async function generateCode(event?: Abstract) {
 
   console.log("Generating code...");
   editorStore.code = cppGenerator.workspaceToCode(editorStore.workspace);
+  await editorStore.saveWorkspace();
 }
 
 watch(() => editorStore.dividerPos, () => {
@@ -73,6 +74,8 @@ onMounted(() => {
   editorStore.workspace = Blockly.inject(blockEditor.value, editorOptions);
   editorStore.workspace.addChangeListener(generateCode);
   editorStore.workspace.addChangeListener(Blockly.Events.disableOrphans);
+
+  editorStore.loadSavedWorkspace();
 })
 
 </script>
