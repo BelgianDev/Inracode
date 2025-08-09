@@ -68,7 +68,7 @@ export class CustomPrintBlock extends CodeBlock { // Extend the base CodeBlock c
     }
 
     protected category(): CategoryInfo { // Category of the block, used to represents where in the toolbox the block is located.
-        return Categories.CUSTOM_CATEGORY;
+        return Categories.CUSTOM;
     }
 
     protected definition(): BlockDefinition { // Blockly Block definition, see https://developers.google.com/blockly/guides/create-custom-blocks/define/block-definitions
@@ -121,7 +121,7 @@ To add your own Category, you can simply append your category to the list of sta
 ```typescript
 export class Categories {
     // ...
-    static readonly CUSTOM = registerCategory('Core', 60); // Identifier and color.
+    static readonly CUSTOM = registerCategory('Custom', 60); // Identifier and color.
     // ...
     
     static asToolboxContent(): ToolboxItemInfo[] {
