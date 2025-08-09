@@ -38,7 +38,7 @@ export const useEditorStore = defineStore('editor-prefs', ()  => {
         serialization.workspaces.load(data, getMainWorkspace()) // Quick Patch: getMainWorkspace works while getting the ref doesn't, why ? I don't know. -> https://github.com/google/blockly/issues/7055
     }
 
-    async function serializeWorkspace(): Promise<any> {
+    function serializeWorkspace(): any {
         return serialization.workspaces.save(workspace.value)
     }
 
@@ -54,7 +54,7 @@ export const useEditorStore = defineStore('editor-prefs', ()  => {
         if (!workspace.value)
             return
 
-        const serializedWorkspace = await serializeWorkspace();
+        const serializedWorkspace = serializeWorkspace();
         await IDB.saveWorkspace(WORKSPACE_IDENTIFIER, serializedWorkspace);
     }
 
