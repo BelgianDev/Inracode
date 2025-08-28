@@ -4,11 +4,12 @@ import * as Blockly from 'blockly';
 import {Categories} from "../../Categories.ts";
 import {Order} from "blockly/javascript";
 
-const BOOLEAN = "BOOL";
-
 export class BooleanBlock extends StandardBlock {
+    public static readonly IDENTIFIER: string = "logic_boolean";
+    public static readonly BOOLEAN: string = "BOOL";
+
     protected identifier(): string {
-        return "logic_boolean";
+        return BooleanBlock.IDENTIFIER;
     }
 
     protected category(): CategoryInfo {
@@ -16,8 +17,7 @@ export class BooleanBlock extends StandardBlock {
     }
 
     protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
-        const code = block.getFieldValue(BOOLEAN).toLowerCase();
-
+        const code = block.getFieldValue(BooleanBlock.BOOLEAN).toLowerCase();
         return [code, Order.NONE]
     }
 

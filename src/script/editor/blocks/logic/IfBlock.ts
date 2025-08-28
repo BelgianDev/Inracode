@@ -4,13 +4,14 @@ import * as Blockly from 'blockly';
 import {Categories} from "../../Categories.ts";
 import {Order} from "blockly/javascript";
 
-const IF_MEMBER = "IF";
-const DO_MEMBER = "DO";
-const ELSE_MEMBER = "ELSE";
-
 export class IfBlock extends StandardBlock {
+    public static readonly IDENTIFIER: string = "controls_if";
+    public static readonly IF_MEMBER: string = "IF";
+    public static readonly DO_MEMBER: string = "DO";
+    public static readonly ELSE_MEMBER: string = "ELSE";
+
     protected identifier(): string {
-        return "controls_if";
+        return IfBlock.IDENTIFIER;
     }
 
     protected category(): CategoryInfo {
@@ -21,9 +22,9 @@ export class IfBlock extends StandardBlock {
         let count = 0;
         let code = '';
 
-        while (block.getInput(IF_MEMBER + count) !== null) {
-            const conditionCode = generator.valueToCode(block, IF_MEMBER + count, Order.NONE);
-            const statementCode = generator.statementToCode(block, DO_MEMBER + count);
+        while (block.getInput(IfBlock.IF_MEMBER + count) !== null) {
+            const conditionCode = generator.valueToCode(block, IfBlock.IF_MEMBER + count, Order.NONE);
+            const statementCode = generator.statementToCode(block, IfBlock.DO_MEMBER + count);
 
             code +=
                 (count > 0 ? ' else ' : '') +
@@ -34,8 +35,8 @@ export class IfBlock extends StandardBlock {
             count++;
         }
 
-        if (block.getInput(ELSE_MEMBER)) {
-            const statementCode = generator.statementToCode(block, ELSE_MEMBER);
+        if (block.getInput(IfBlock.ELSE_MEMBER)) {
+            const statementCode = generator.statementToCode(block, IfBlock.ELSE_MEMBER);
             code += ' else {\n' + statementCode + '\n}';
         }
 

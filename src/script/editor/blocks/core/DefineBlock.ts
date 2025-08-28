@@ -5,12 +5,13 @@ import {Categories} from "../../Categories.ts";
 import type {BlockDefinition} from "blockly/core/blocks";
 import {Order} from "blockly/javascript";
 
-const VAR_NAME = "VAR_NAME";
-const VAR_VALUE = "VAR_VALUE";
-
 export class DefineBlock extends CodeBlock {
+    public static readonly IDENTIFIER: string = "core-define";
+    public static readonly VAR_NAME: string = "VAR_NAME";
+    public static readonly VAR_VALUE: string = "VAR_VALUE";
+
     protected identifier(): string {
-        return "core-define";
+        return DefineBlock.IDENTIFIER;
     }
 
     protected category(): CategoryInfo {
@@ -20,9 +21,9 @@ export class DefineBlock extends CodeBlock {
     protected definition(): BlockDefinition {
         return {
             init: function () {
-                this.appendValueInput(VAR_VALUE)
+                this.appendValueInput(DefineBlock.VAR_VALUE)
                     .appendField('define')
-                    .appendField(new Blockly.FieldTextInput('CONSTANT'), VAR_NAME)
+                    .appendField(new Blockly.FieldTextInput('CONSTANT'), DefineBlock.VAR_NAME)
                     .appendField('as')
                 this.setPreviousStatement(true, null);
                 this.setNextStatement(true, null);
@@ -33,10 +34,8 @@ export class DefineBlock extends CodeBlock {
     }
 
     protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
-        const name = block.getFieldValue(VAR_NAME);
-        const value = generator.valueToCode(block, VAR_VALUE, Order.NONE);
-
-
+        const name = block.getFieldValue(DefineBlock.VAR_NAME);
+        const value = generator.valueToCode(block, DefineBlock.VAR_VALUE, Order.NONE);
 
         return "#define " + name + " " + value;
     }

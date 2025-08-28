@@ -4,13 +4,15 @@ import type {CategoryInfo} from "blockly/core/utils/toolbox";
 import {Categories} from "../../Categories.ts";
 import type {BlockDefinition} from "blockly/core/blocks";
 import {Order} from "blockly/javascript";
-
-const X = "X";
-const Y = "Y";
+import {NumberBlock} from "../variable/NumberBlock.ts";
 
 export class LcdCursorBlock extends CodeBlock {
+    public static readonly IDENTIFIER: string = "m5-lcd-cursor";
+    public static readonly X: string = "X";
+    public static readonly Y: string = "Y";
+
     protected identifier(): string {
-        return "m5-lcd-cursor";
+        return LcdCursorBlock.IDENTIFIER;
     }
 
     protected category(): CategoryInfo {
@@ -20,11 +22,11 @@ export class LcdCursorBlock extends CodeBlock {
     protected definition(): BlockDefinition {
         return {
             init: function () {
-                this.appendValueInput(X)
+                this.appendValueInput(LcdCursorBlock.X)
                     .setCheck('Number')
                     .appendField('set LCD cursor to')
                     .appendField('X:');
-                this.appendValueInput(Y)
+                this.appendValueInput(LcdCursorBlock.Y)
                     .setCheck('Number')
                     .appendField('Y:');
                 this.setInputsInline(true)
@@ -37,9 +39,34 @@ export class LcdCursorBlock extends CodeBlock {
     }
 
     protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
-        const x = generator.valueToCode(block, X, Order.NONE);
-        const y = generator.valueToCode(block, Y, Order.NONE);
+        const x = generator.valueToCode(block, LcdCursorBlock.X, Order.NONE);
+        const y = generator.valueToCode(block, LcdCursorBlock.Y, Order.NONE);
 
         return "M5.Lcd.setCursor(" + x + ", " + y + ");";
+    }
+
+    protected fillCategory(category: CategoryInfo) {
+        category.contents.push({
+            kind: 'block',
+            type: this.identifier(),
+            inputs: {
+                [LcdCursorBlock.X]: {
+                    "block": {
+                        "type": NumberBlock.IDENTIFIER,
+                        "fields": {
+                            [NumberBlock.NUM]: 0
+                        }
+                    }
+                },
+                [LcdCursorBlock.Y]: {
+                    "block": {
+                        "type": NumberBlock.IDENTIFIER,
+                        "fields": {
+                            [NumberBlock.NUM]: 0
+                        }
+                    }
+                }
+            }
+        })
     }
 }

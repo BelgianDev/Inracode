@@ -5,13 +5,14 @@ import {Categories} from "../../Categories.ts";
 import type {BlockDefinition} from "blockly/core/blocks";
 import {Order} from "blockly/javascript";
 
-const VAR_NAME = "VAR_NAME";
-const VAR_TYPE = "VAR_TYPE";
-const VAR_VALUE = "VAR_VALUE";
-
 export class DefineVariableBlock extends CodeBlock {
+    private static readonly IDENTIFIER: string = "var-define";
+    private static readonly VAR_NAME: string = "VAR_NAME";
+    private static readonly VAR_TYPE: string = "VAR_TYPE";
+    private static readonly VAR_VALUE: string = "VAR_VALUE";
+
     protected identifier(): string {
-        return "var-define";
+        return DefineVariableBlock.IDENTIFIER;
     }
 
     protected category(): CategoryInfo {
@@ -21,9 +22,9 @@ export class DefineVariableBlock extends CodeBlock {
     protected definition(): BlockDefinition {
         return {
             init: function () {
-                this.appendValueInput(VAR_VALUE)
+                this.appendValueInput(DefineVariableBlock.VAR_VALUE)
                     .appendField('define variable')
-                    .appendField(new Blockly.FieldTextInput('variable'), VAR_NAME)
+                    .appendField(new Blockly.FieldTextInput('variable'), DefineVariableBlock.VAR_NAME)
                     .appendField('of type')
                     .appendField(new Blockly.FieldDropdown([
                         ['Boolean', 'bool'],
@@ -36,7 +37,7 @@ export class DefineVariableBlock extends CodeBlock {
                         ['Unsigned Long', 'unsigned long'],
                         ['Float', 'float'],
                         ['Double', 'double']
-                    ]), VAR_TYPE)
+                    ]), DefineVariableBlock.VAR_TYPE)
                     .appendField('as')
                 this.setPreviousStatement(true, null);
                 this.setNextStatement(true, null);
@@ -47,9 +48,9 @@ export class DefineVariableBlock extends CodeBlock {
     }
 
     protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
-        const name = block.getFieldValue(VAR_NAME);
-        const type = block.getFieldValue(VAR_TYPE);
-        const value = generator.valueToCode(block, VAR_VALUE, Order.NONE);
+        const name = block.getFieldValue(DefineVariableBlock.VAR_NAME);
+        const type = block.getFieldValue(DefineVariableBlock.VAR_TYPE);
+        const value = generator.valueToCode(block, DefineVariableBlock.VAR_VALUE, Order.NONE);
 
         if (!value || value.length === 0)
             return type + ' ' + name + ';';

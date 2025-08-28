@@ -52,6 +52,12 @@ const REGISTERED_BLOCKS: CodeBlock[] = [
 ];
 
 export function registerBlocks() {
-    REGISTERED_BLOCKS.forEach(block => block.register());
+    REGISTERED_BLOCKS.forEach(block => {
+        try {
+            block.register();
+        } catch (e) {
+            console.error("Failed to register block '" + block.identifier() + "': ", e);
+        }
+    });
 }
 

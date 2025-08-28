@@ -5,12 +5,13 @@ import {Categories} from "../../Categories.ts";
 import type {BlockDefinition} from "blockly/core/blocks";
 import {Order} from "blockly/javascript";
 
-const VAR_NAME = "VAR_NAME";
-const VAR_VALUE = "VAR_VALUE";
-
 export class SetVariableBlock extends CodeBlock {
+    public static readonly IDENTIFIER: string = "var-set";
+    public static readonly VAR_NAME: string = "VAR_NAME";
+    public static readonly VAR_VALUE: string = "VAR_VALUE";
+
     protected identifier(): string {
-        return "var-set";
+        return SetVariableBlock.IDENTIFIER;
     }
 
     protected category(): CategoryInfo {
@@ -20,9 +21,9 @@ export class SetVariableBlock extends CodeBlock {
     protected definition(): BlockDefinition {
         return {
             init: function () {
-                this.appendValueInput('VAR_VALUE')
+                this.appendValueInput(SetVariableBlock.VAR_VALUE)
                     .appendField('set')
-                    .appendField(new Blockly.FieldTextInput('variable'), 'VAR_NAME')
+                    .appendField(new Blockly.FieldTextInput('variable'), SetVariableBlock.VAR_NAME)
                     .appendField('to');
                 this.setPreviousStatement(true, null);
                 this.setNextStatement(true, null);
@@ -33,8 +34,8 @@ export class SetVariableBlock extends CodeBlock {
     }
 
     protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
-        const name = block.getFieldValue(VAR_NAME);
-        const value = generator.valueToCode(block, VAR_VALUE, Order.NONE)
+        const name = block.getFieldValue(SetVariableBlock.VAR_NAME);
+        const value = generator.valueToCode(block, SetVariableBlock.VAR_VALUE, Order.NONE)
 
         return name + " = " + value + ";";
     }

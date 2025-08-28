@@ -4,11 +4,12 @@ import * as Blockly from 'blockly';
 import {Categories} from "../../Categories.ts";
 import {Order} from "blockly/javascript";
 
-const INPUT = "TEXT";
-
 export class TextBlock extends StandardBlock {
+    public static readonly IDENTIFIER: string = "text";
+    public static readonly INPUT: string = "TEXT";
+
     protected identifier(): string {
-        return "text";
+        return TextBlock.IDENTIFIER;
     }
 
     protected category(): CategoryInfo {
@@ -16,7 +17,7 @@ export class TextBlock extends StandardBlock {
     }
 
     protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
-        const input = block.getFieldValue(INPUT);
+        const input = block.getFieldValue(TextBlock.INPUT);
 
         const code = '"' + input + '"';
         return [code, Order.NONE]

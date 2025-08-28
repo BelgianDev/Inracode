@@ -4,11 +4,12 @@ import type {CategoryInfo} from "blockly/core/utils/toolbox";
 import {Categories} from "../../Categories.ts";
 import type {BlockDefinition} from "blockly/core/blocks";
 
-const MEMBERS = "MEMBERS";
-
 export class SetupBlock extends CodeBlock {
+    public static readonly IDENTIFIER: string = "core-setup";
+    public static readonly MEMBERS: string = "MEMBERS";
+
     protected identifier(): string {
-        return "core-setup";
+        return SetupBlock.IDENTIFIER;
     }
 
     protected category(): CategoryInfo {
@@ -19,14 +20,14 @@ export class SetupBlock extends CodeBlock {
         return {
             init: function () {
                 this.appendDummyInput().appendField('setup');
-                this.appendStatementInput(MEMBERS)
+                this.appendStatementInput(SetupBlock.MEMBERS)
                 this.appendEndRowInput();
             }
         }
     }
 
     protected generateCode(block: Block, generator: CodeGenerator): string | [string, number] {
-        const statementMembers = generator.statementToCode(block, MEMBERS);
+        const statementMembers = generator.statementToCode(block, SetupBlock.MEMBERS);
 
         return '\nvoid setup() {\n' + statementMembers + '\n}';
     }

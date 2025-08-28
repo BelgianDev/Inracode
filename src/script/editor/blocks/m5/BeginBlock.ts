@@ -5,8 +5,10 @@ import {Categories} from "../../Categories.ts";
 import type {BlockDefinition} from "blockly/core/blocks";
 
 export class BeginBlock extends CodeBlock {
+    public static readonly IDENTIFIER: string = "m5-begin";
+
     protected identifier(): string {
-        return "m5-begin";
+        return BeginBlock.IDENTIFIER;
     }
 
     protected category(): CategoryInfo {
