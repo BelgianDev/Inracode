@@ -8,9 +8,9 @@ import {SetupBlock} from "./blocks/core/SetupBlock.ts";
 import {LoopBlock} from "./blocks/core/LoopBlock.ts";
 import {GlobalBlock} from "./blocks/core/GlobalBlock.ts";
 import {BeginBlock} from "./blocks/m5/BeginBlock.ts";
-import {LcdCursorBlock} from "./blocks/m5/LcdCursorBlock.ts";
-import {LcdTextSizeBlock} from "./blocks/m5/LcdTextSizeBlock.ts";
-import {LcdPrintBlock} from "./blocks/m5/LcdPrintBlock.ts";
+import {LcdCursorBlock} from "./blocks/m5/lcd/LcdCursorBlock.ts";
+import {LcdTextSizeBlock} from "./blocks/m5/lcd/LcdTextSizeBlock.ts";
+import {LcdPrintBlock} from "./blocks/m5/lcd/LcdPrintBlock.ts";
 import {DefineBlock} from "./blocks/core/DefineBlock.ts";
 import {NumberBlock} from "./blocks/variable/NumberBlock.ts"
 import {GetVariableBlock} from "./blocks/variable/GetVariableBlock.ts";
@@ -20,6 +20,9 @@ import {BooleanBlock} from "./blocks/variable/BooleanBlock.ts";
 import {NegateBlock} from "./blocks/logic/NegateBlock.ts";
 import {NullBlock} from "./blocks/variable/NullBlock.ts";
 import {TextBlock} from "./blocks/variable/TextBlock.ts";
+import {GpioDigitalRead} from "./blocks/m5/gpio/GpioDigitalRead.ts";
+import {GpioDigitalWrite} from "./blocks/m5/gpio/GpioDigitalWrite.ts";
+import {SerialPrintBlock} from "./blocks/m5/serial/SerialPrintBlock.ts";
 
 const REGISTERED_BLOCKS: CodeBlock[] = [
     // Core
@@ -46,9 +49,15 @@ const REGISTERED_BLOCKS: CodeBlock[] = [
 
     // M5
     new BeginBlock(),
+
     new LcdCursorBlock(),
     new LcdTextSizeBlock(),
     new LcdPrintBlock(),
+
+    new GpioDigitalRead(),
+    new GpioDigitalWrite(),
+
+    new SerialPrintBlock()
 ];
 
 export function registerBlocks() {

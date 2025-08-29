@@ -1,34 +1,32 @@
-import {CodeBlock} from "../../CodeBlock.ts";
+import {CodeBlock} from "../../../CodeBlock.ts";
 import * as Blockly from "blockly";
 import type {CategoryInfo} from "blockly/core/utils/toolbox";
-import {Categories} from "../../Categories.ts";
+import {Categories} from "../../../Categories.ts";
 import type {BlockDefinition} from "blockly/core/blocks";
 import {Order} from "blockly/javascript";
-import {NumberBlock} from "../variable/NumberBlock.ts";
+import {NumberBlock} from "../../variable/NumberBlock.ts";
+import {BooleanBlock} from "../../variable/BooleanBlock.ts";
 
-export class LcdCursorBlock extends CodeBlock {
-    public static readonly IDENTIFIER: string = "m5-lcd-cursor";
-    public static readonly X: string = "X";
-    public static readonly Y: string = "Y";
+export class GpioDigitalWrite extends CodeBlock {
+    public static readonly IDENTIFIER: string = "m5-gpio-digital-write";
+    public static readonly PIN_NUMBER: string = "PIN_NUMBER";
+    public static readonly VALUE: string = "VALUE";
 
     protected identifier(): string {
-        return LcdCursorBlock.IDENTIFIER;
+        return GpioDigitalWrite.IDENTIFIER;
     }
 
     protected category(): CategoryInfo {
-        return Categories.M5STACK;
+        return Categories.M5STACK_GPIO;
     }
 
     protected definition(): BlockDefinition {
         return {
             init: function () {
-                this.appendValueInput(LcdCursorBlock.X)
-                    .setCheck('Number')
-                    .appendField('set LCD cursor to')
-                    .appendField('X:');
-                this.appendValueInput(LcdCursorBlock.Y)
-                    .setCheck('Number')
-                    .appendField('Y:');
+                this.appendValueInput(GpioDigitalWrite.VALUE)
+                    .appendField('write')
+                this.appendValueInput(GpioDigitalWrite.PIN_NUMBER)
+                    .appendField('to pin')
                 this.setInputsInline(true)
                 this.setPreviousStatement(true, null);
                 this.setNextStatement(true, null);
@@ -39,10 +37,10 @@ export class LcdCursorBlock extends CodeBlock {
     }
 
     protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
-        const x = generator.valueToCode(block, LcdCursorBlock.X, Order.NONE);
-        const y = generator.valueToCode(block, LcdCursorBlock.Y, Order.NONE);
+        const pinNumber = generator.valueToCode(block, GpioDigitalWrite.PIN_NUMBER, Order.NONE);
+        const value = generator.valueToCode(block, GpioDigitalWrite.VALUE, Order.NONE);
 
-        return "M5.Lcd.setCursor(" + x + ", " + y + ");";
+        return "digitalWrite(" + pinNumber + ", " + value + ");"
     }
 
     protected fillCategory(category: CategoryInfo) {
@@ -50,19 +48,19 @@ export class LcdCursorBlock extends CodeBlock {
             kind: 'block',
             type: this.identifier(),
             inputs: {
-                [LcdCursorBlock.X]: {
+                [GpioDigitalWrite.VALUE]: {
                     "block": {
-                        "type": NumberBlock.IDENTIFIER,
+                        "type": BooleanBlock.IDENTIFIER,
                         "fields": {
-                            [NumberBlock.NUM]: 0
+                            [BooleanBlock.BOOLEAN]: true
                         }
                     }
                 },
-                [LcdCursorBlock.Y]: {
+                [GpioDigitalWrite.PIN_NUMBER]: {
                     "block": {
                         "type": NumberBlock.IDENTIFIER,
                         "fields": {
-                            [NumberBlock.NUM]: 0
+                            [NumberBlock.NUM]: 1
                         }
                     }
                 }

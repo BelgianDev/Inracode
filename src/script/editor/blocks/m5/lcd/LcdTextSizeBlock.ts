@@ -1,10 +1,10 @@
-import {CodeBlock} from "../../CodeBlock.ts";
+import {CodeBlock} from "../../../CodeBlock.ts";
 import * as Blockly from "blockly";
 import type {CategoryInfo} from "blockly/core/utils/toolbox";
-import {Categories} from "../../Categories.ts";
+import {Categories} from "../../../Categories.ts";
 import type {BlockDefinition} from "blockly/core/blocks";
 import {Order} from "blockly/javascript";
-import {NumberBlock} from "../variable/NumberBlock.ts";
+import {NumberBlock} from "../../variable/NumberBlock.ts";
 
 export class LcdTextSizeBlock extends CodeBlock {
     public static readonly IDENTIFIER: string = "m5-lcd-size";
@@ -15,7 +15,7 @@ export class LcdTextSizeBlock extends CodeBlock {
     }
 
     protected category(): CategoryInfo {
-        return Categories.M5STACK;
+        return Categories.M5STACK_LCD;
     }
 
     protected definition(): BlockDefinition {

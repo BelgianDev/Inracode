@@ -1,22 +1,22 @@
-import {CodeBlock} from "../../CodeBlock.ts";
+import {CodeBlock} from "../../../CodeBlock.ts";
 import * as Blockly from "blockly";
 import type {CategoryInfo} from "blockly/core/utils/toolbox";
-import {Categories} from "../../Categories.ts";
+import {Categories} from "../../../Categories.ts";
 import type {BlockDefinition} from "blockly/core/blocks";
 import {Order} from "blockly/javascript";
-import {TextBlock} from "../variable/TextBlock.ts";
-import {GetVariableBlock} from "../variable/GetVariableBlock.ts";
+import {TextBlock} from "../../variable/TextBlock.ts";
+import {GetVariableBlock} from "../../variable/GetVariableBlock.ts";
 
 export class LcdPrintBlock extends CodeBlock {
-    public static IDENTIFIER: string = "m5-lcd-print";
-    public static INPUT: string = "INPUT"
+    public static readonly IDENTIFIER: string = "m5-lcd-print";
+    public static readonly INPUT: string = "INPUT"
 
     protected identifier(): string {
         return LcdPrintBlock.IDENTIFIER;
     }
 
     protected category(): CategoryInfo {
-        return Categories.M5STACK;
+        return Categories.M5STACK_LCD;
     }
 
     protected definition(): BlockDefinition {

@@ -42,7 +42,7 @@ class Category implements CategoryInfo {
         this.expanded = undefined;
     }
 
-    public createSubDirectory(name: string, color: number): Category {
+    public createSubCategory(name: string, color: number): Category {
         const subCategory = new Category(name, color);
         this.contents.push(subCategory);
         return subCategory;
@@ -57,6 +57,9 @@ export class Categories {
 
     // Module Specific
     static readonly M5STACK = createRootCategory('M5Stack', 360);
+    static readonly M5STACK_SERIAL = Categories.M5STACK.createSubCategory("Serial", 160);
+    static readonly M5STACK_LCD = Categories.M5STACK.createSubCategory('LCD', 240);
+    static readonly M5STACK_GPIO = Categories.M5STACK.createSubCategory('GPIO', 120);
 
     static asToolboxContent(): ToolboxItemInfo[] {
         return toolbox;

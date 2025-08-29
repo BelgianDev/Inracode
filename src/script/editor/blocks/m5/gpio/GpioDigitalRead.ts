@@ -1,0 +1,54 @@
+import {CodeBlock} from "../../../CodeBlock.ts";
+import * as Blockly from "blockly";
+import type {CategoryInfo} from "blockly/core/utils/toolbox";
+import {Categories} from "../../../Categories.ts";
+import type {BlockDefinition} from "blockly/core/blocks";
+import {Order} from "blockly/javascript";
+import {NumberBlock} from "../../variable/NumberBlock.ts";
+
+export class GpioDigitalRead extends CodeBlock {
+    public static readonly IDENTIFIER: string = "m5-gpio-digital-read";
+    public static readonly PIN_NUMBER: string = "PIN_NUMBER";
+
+    protected identifier(): string {
+        return GpioDigitalRead.IDENTIFIER;
+    }
+
+    protected category(): CategoryInfo {
+        return Categories.M5STACK_GPIO;
+    }
+
+    protected definition(): BlockDefinition {
+        return {
+            init: function () {
+                this.appendValueInput(GpioDigitalRead.PIN_NUMBER)
+                    .appendField('read from pin')
+                this.setOutput(true, null);
+                this.setTooltip('');
+                this.setHelpUrl('');
+            }
+        }
+    }
+
+    protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
+        const pinNumber = generator.valueToCode(block, GpioDigitalRead.PIN_NUMBER, Order.NONE);
+        return ["digitalRead(" + pinNumber + ")", Order.NONE]
+    }
+
+    protected fillCategory(category: CategoryInfo) {
+        category.contents.push({
+            kind: 'block',
+            type: this.identifier(),
+            inputs: {
+                [GpioDigitalRead.PIN_NUMBER]: {
+                    "block": {
+                        "type": NumberBlock.IDENTIFIER,
+                        "fields": {
+                            [NumberBlock.NUM]: 1
+                        }
+                    }
+                }
+            }
+        })
+    }
+}
