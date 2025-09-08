@@ -6,12 +6,12 @@ import type {BlockDefinition} from "blockly/core/blocks";
 import {Order} from "blockly/javascript";
 import {NumberBlock} from "../../variable/NumberBlock.ts";
 
-export class GpioDigitalRead extends CodeBlock {
+export class GpioDigitalReadBlock extends CodeBlock {
     public static readonly IDENTIFIER: string = "m5-gpio-digital-read";
     public static readonly PIN_NUMBER: string = "PIN_NUMBER";
 
     protected identifier(): string {
-        return GpioDigitalRead.IDENTIFIER;
+        return GpioDigitalReadBlock.IDENTIFIER;
     }
 
     protected category(): CategoryInfo {
@@ -21,7 +21,7 @@ export class GpioDigitalRead extends CodeBlock {
     protected definition(): BlockDefinition {
         return {
             init: function () {
-                this.appendValueInput(GpioDigitalRead.PIN_NUMBER)
+                this.appendValueInput(GpioDigitalReadBlock.PIN_NUMBER)
                     .appendField('read from pin')
                 this.setOutput(true, null);
                 this.setTooltip('');
@@ -31,7 +31,7 @@ export class GpioDigitalRead extends CodeBlock {
     }
 
     protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
-        const pinNumber = generator.valueToCode(block, GpioDigitalRead.PIN_NUMBER, Order.NONE);
+        const pinNumber = generator.valueToCode(block, GpioDigitalReadBlock.PIN_NUMBER, Order.NONE);
         return ["digitalRead(" + pinNumber + ")", Order.NONE]
     }
 
@@ -40,7 +40,7 @@ export class GpioDigitalRead extends CodeBlock {
             kind: 'block',
             type: this.identifier(),
             inputs: {
-                [GpioDigitalRead.PIN_NUMBER]: {
+                [GpioDigitalReadBlock.PIN_NUMBER]: {
                     "block": {
                         "type": NumberBlock.IDENTIFIER,
                         "fields": {

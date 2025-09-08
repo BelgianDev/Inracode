@@ -20,14 +20,20 @@ import {BooleanBlock} from "./blocks/variable/BooleanBlock.ts";
 import {NegateBlock} from "./blocks/logic/NegateBlock.ts";
 import {NullBlock} from "./blocks/variable/NullBlock.ts";
 import {TextBlock} from "./blocks/variable/TextBlock.ts";
-import {GpioDigitalRead} from "./blocks/m5/gpio/GpioDigitalRead.ts";
-import {GpioDigitalWrite} from "./blocks/m5/gpio/GpioDigitalWrite.ts";
+import {GpioDigitalReadBlock} from "./blocks/m5/gpio/GpioDigitalReadBlock.ts";
+import {GpioDigitalWriteBlock} from "./blocks/m5/gpio/GpioDigitalWriteBlock.ts";
 import {SerialPrintBlock} from "./blocks/m5/serial/SerialPrintBlock.ts";
 import {SerialPrintFormatBlock} from "./blocks/m5/serial/SerialPrintFormatBlock.ts";
 import {LcdPrintFormatBlock} from "./blocks/m5/lcd/LcdPrintFormatBlock.ts";
 import {LcdPrintLineBlock} from "./blocks/m5/lcd/LcdPrintLineBlock.ts";
 import {SerialPrintLineBlock} from "./blocks/m5/serial/SerialPrintLineBlock.ts";
 import {ArithmeticBlock} from "./blocks/math/ArithmeticBlock.ts";
+import {GpioModeBlock} from "./blocks/m5/gpio/GpioModeBlock.ts";
+import {ForILoopBlock} from "./blocks/logic/ForILoopBlock.ts";
+import {BreakBlock} from "./blocks/logic/BreakBlock.ts";
+import {ReturnBlock} from "./blocks/logic/ReturnBlock.ts";
+import {ContinueBlock} from "./blocks/logic/ContinueBlock.ts";
+import {WhileLoopBlock} from "./blocks/logic/WhileLoopBlock.ts";
 
 const REGISTERED_BLOCKS: CodeBlock[] = [
     // Core
@@ -42,6 +48,11 @@ const REGISTERED_BLOCKS: CodeBlock[] = [
     new CompareBlock(),
     new OperationBlock(),
     new IfBlock(),
+    new ForILoopBlock(),
+    new WhileLoopBlock(),
+    new ReturnBlock(),
+    new BreakBlock(),
+    new ContinueBlock(),
 
     // Math
     new ArithmeticBlock(),
@@ -58,6 +69,7 @@ const REGISTERED_BLOCKS: CodeBlock[] = [
     // M5
     new BeginBlock(),
 
+    // M5 LCD
     new LcdCursorBlock(),
     new LcdTextSizeBlock(),
     new LcdPrintBlock(),
@@ -67,9 +79,12 @@ const REGISTERED_BLOCKS: CodeBlock[] = [
     new LcdPrintFormatBlock(3),
     new LcdPrintFormatBlock(4),
 
-    new GpioDigitalRead(),
-    new GpioDigitalWrite(),
+    // M5 GPIO
+    new GpioModeBlock(),
+    new GpioDigitalWriteBlock(),
+    new GpioDigitalReadBlock(),
 
+    // M5 Serial
     new SerialPrintBlock(),
     new SerialPrintLineBlock(),
     new SerialPrintFormatBlock(1),

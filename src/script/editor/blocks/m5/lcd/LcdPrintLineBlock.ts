@@ -46,7 +46,7 @@ export class LcdPrintLineBlock extends CodeBlock {
             kind: 'block',
             type: this.identifier(),
             inputs: {
-                [LcdPrintBlock.INPUT]: {
+                [LcdPrintLineBlock.INPUT]: {
                     "block": {
                         "type": TextBlock.IDENTIFIER,
                         "fields": {
@@ -61,7 +61,7 @@ export class LcdPrintLineBlock extends CodeBlock {
             kind: 'block',
             type: this.identifier(),
             inputs: {
-                [LcdPrintBlock.INPUT]: {
+                [LcdPrintLineBlock.INPUT]: {
                     "block": {
                         "type": GetVariableBlock.IDENTIFIER,
                         "fields": {

@@ -7,13 +7,13 @@ import {Order} from "blockly/javascript";
 import {NumberBlock} from "../../variable/NumberBlock.ts";
 import {BooleanBlock} from "../../variable/BooleanBlock.ts";
 
-export class GpioDigitalWrite extends CodeBlock {
+export class GpioDigitalWriteBlock extends CodeBlock {
     public static readonly IDENTIFIER: string = "m5-gpio-digital-write";
     public static readonly PIN_NUMBER: string = "PIN_NUMBER";
     public static readonly VALUE: string = "VALUE";
 
     protected identifier(): string {
-        return GpioDigitalWrite.IDENTIFIER;
+        return GpioDigitalWriteBlock.IDENTIFIER;
     }
 
     protected category(): CategoryInfo {
@@ -23,9 +23,9 @@ export class GpioDigitalWrite extends CodeBlock {
     protected definition(): BlockDefinition {
         return {
             init: function () {
-                this.appendValueInput(GpioDigitalWrite.VALUE)
+                this.appendValueInput(GpioDigitalWriteBlock.VALUE)
                     .appendField('write')
-                this.appendValueInput(GpioDigitalWrite.PIN_NUMBER)
+                this.appendValueInput(GpioDigitalWriteBlock.PIN_NUMBER)
                     .appendField('to pin')
                 this.setInputsInline(true)
                 this.setPreviousStatement(true, null);
@@ -37,8 +37,8 @@ export class GpioDigitalWrite extends CodeBlock {
     }
 
     protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
-        const pinNumber = generator.valueToCode(block, GpioDigitalWrite.PIN_NUMBER, Order.NONE);
-        const value = generator.valueToCode(block, GpioDigitalWrite.VALUE, Order.NONE);
+        const pinNumber = generator.valueToCode(block, GpioDigitalWriteBlock.PIN_NUMBER, Order.NONE);
+        const value = generator.valueToCode(block, GpioDigitalWriteBlock.VALUE, Order.NONE);
 
         return "digitalWrite(" + pinNumber + ", " + value + ");"
     }
@@ -48,7 +48,7 @@ export class GpioDigitalWrite extends CodeBlock {
             kind: 'block',
             type: this.identifier(),
             inputs: {
-                [GpioDigitalWrite.VALUE]: {
+                [GpioDigitalWriteBlock.VALUE]: {
                     "block": {
                         "type": BooleanBlock.IDENTIFIER,
                         "fields": {
@@ -56,7 +56,7 @@ export class GpioDigitalWrite extends CodeBlock {
                         }
                     }
                 },
-                [GpioDigitalWrite.PIN_NUMBER]: {
+                [GpioDigitalWriteBlock.PIN_NUMBER]: {
                     "block": {
                         "type": NumberBlock.IDENTIFIER,
                         "fields": {
