@@ -23,6 +23,11 @@ import {TextBlock} from "./blocks/variable/TextBlock.ts";
 import {GpioDigitalRead} from "./blocks/m5/gpio/GpioDigitalRead.ts";
 import {GpioDigitalWrite} from "./blocks/m5/gpio/GpioDigitalWrite.ts";
 import {SerialPrintBlock} from "./blocks/m5/serial/SerialPrintBlock.ts";
+import {SerialPrintFormatBlock} from "./blocks/m5/serial/SerialPrintFormatBlock.ts";
+import {LcdPrintFormatBlock} from "./blocks/m5/lcd/LcdPrintFormatBlock.ts";
+import {LcdPrintLineBlock} from "./blocks/m5/lcd/LcdPrintLineBlock.ts";
+import {SerialPrintLineBlock} from "./blocks/m5/serial/SerialPrintLineBlock.ts";
+import {ArithmeticBlock} from "./blocks/math/ArithmeticBlock.ts";
 
 const REGISTERED_BLOCKS: CodeBlock[] = [
     // Core
@@ -37,6 +42,9 @@ const REGISTERED_BLOCKS: CodeBlock[] = [
     new CompareBlock(),
     new OperationBlock(),
     new IfBlock(),
+
+    // Math
+    new ArithmeticBlock(),
 
     // Variable
     new NullBlock(),
@@ -53,11 +61,21 @@ const REGISTERED_BLOCKS: CodeBlock[] = [
     new LcdCursorBlock(),
     new LcdTextSizeBlock(),
     new LcdPrintBlock(),
+    new LcdPrintLineBlock(),
+    new LcdPrintFormatBlock(1),
+    new LcdPrintFormatBlock(2),
+    new LcdPrintFormatBlock(3),
+    new LcdPrintFormatBlock(4),
 
     new GpioDigitalRead(),
     new GpioDigitalWrite(),
 
-    new SerialPrintBlock()
+    new SerialPrintBlock(),
+    new SerialPrintLineBlock(),
+    new SerialPrintFormatBlock(1),
+    new SerialPrintFormatBlock(2),
+    new SerialPrintFormatBlock(3),
+    new SerialPrintFormatBlock(4)
 ];
 
 export function registerBlocks() {
