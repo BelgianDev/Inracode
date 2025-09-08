@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import {NCard, NFloatButton, NIcon, NModal, NP, NSplit, NText, NTooltip, NUpload, NUploadDragger, useDialog, NDescriptions, NDescriptionsItem, NDivider, NButton, NSpace, NAlert} from 'naive-ui';
+import {NCard, NFloatButton, NIcon, NModal, NP, NSplit, NText, NTooltip, NUpload, NUploadDragger, useDialog, NAvatar,
+  NDescriptions, NDescriptionsItem, NDivider, NButton, NSpace, NAlert, NPageHeader} from 'naive-ui';
 import BlockEditor from "./editor/BlockEditor.vue";
 import CodeViewer from "./editor/CodeViewer.vue";
 import {useEditorStore} from "../script/editor/EditorStore.ts";
@@ -10,7 +11,8 @@ import {
   FileImport as ImportIcon,
   Files as CopyIcon,
   FileShredder as ClearIcon,
-  Menu2 as MenuIcon
+  Menu2 as MenuIcon,
+  InfoCircle as InfoIcon,
 } from '@vicons/tabler'
 import {ref} from "vue";
 import type {ProjectFile} from "../script/editor/format/ProjectFile.ts";
@@ -21,6 +23,9 @@ const dialog = useDialog();
 const showImportModal = ref(false);
 const importedFile = ref<ProjectFile | null>(null);
 const showInvalidFileAlert = ref(false);
+
+const showInfoModal = ref(false);
+const version = __APP_VERSION__
 
 const codeCopied = ref(false);
 async function onCopyClick() {
@@ -120,6 +125,14 @@ function formatDate(dateString: string): string {
     <template #menu>
       <n-tooltip trigger="hover" placement="left">
         <template #trigger>
+          <n-float-button :width="48" :height="48" shape="circle" @click="showInfoModal = true">
+            <n-icon size="24"><InfoIcon/></n-icon>
+          </n-float-button>
+        </template>
+        Editor Info
+      </n-tooltip>
+      <n-tooltip trigger="hover" placement="left">
+        <template #trigger>
           <n-float-button :width="48" :height="48" shape="circle" @click="onCopyClick">
             <n-icon v-if="!codeCopied" size="24"><CopyIcon/></n-icon>
             <n-icon v-if="codeCopied" size="24"><CopiedIcon/></n-icon>
@@ -200,6 +213,35 @@ function formatDate(dateString: string): string {
         <n-button @click="showImportModal = false">Cancel</n-button>
         <n-button @click="handleImport" :disabled="!importedFile" type="primary">Import</n-button>
       </n-space>
+    </n-card>
+  </n-modal>
+  <n-modal v-model:show="showInfoModal">
+    <n-card style="width: 900px" title="Inracode" :bordered="false" size="medium" role="dialog" aria-modal="true">
+      <n-page-header>
+        <n-space vertical size="large">
+          Lightweight and intuitive block-based code editor.
+          <n-descriptions>
+            <n-descriptions-item>
+              <template #label>
+                <b>Version</b>
+              </template>
+              {{ version }}
+            </n-descriptions-item>
+            <n-descriptions-item>
+              <template #label>
+                <b>Source</b>
+              </template>
+              <a href="https://github.com/BelgianDev/InraCode" target="_blank">GitHub: BelgianDev/Inracode</a>
+            </n-descriptions-item>
+          </n-descriptions>
+        </n-space>
+        <template #footer>
+          <n-space>
+            <n-avatar src="https://github.com/BelgianDev.png" round size="small"/>
+            <div>Made by <a href="https://github.com/BelgianDev" target="_blank">RaftDev</a></div>
+          </n-space>
+        </template>
+      </n-page-header>
     </n-card>
   </n-modal>
   <n-split direction="horizontal" id="editor-split" v-model:size="editorStore.dividerPos" :min="0.5" :max="0.8">
