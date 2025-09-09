@@ -1,7 +1,9 @@
 import {CodeBlock} from "../../CodeBlock.ts";
 import * as Blockly from "blockly";
+// @ts-ignore
 import type {CategoryInfo} from "blockly/core/utils/toolbox";
 import {Categories} from "../../Categories.ts";
+// @ts-ignore
 import type {BlockDefinition} from "blockly/core/blocks";
 import {Order} from "blockly/javascript";
 
@@ -11,7 +13,7 @@ export class DefineVariableBlock extends CodeBlock {
     private static readonly VAR_TYPE: string = "VAR_TYPE";
     private static readonly VAR_VALUE: string = "VAR_VALUE";
 
-    protected identifier(): string {
+    public identifier(): string {
         return DefineVariableBlock.IDENTIFIER;
     }
 

@@ -1,14 +1,16 @@
 import {CodeBlock} from "../../CodeBlock.ts";
 import * as Blockly from "blockly";
+// @ts-ignore
 import type {CategoryInfo} from "blockly/core/utils/toolbox";
 import {Categories} from "../../Categories.ts";
+// @ts-ignore
 import type {BlockDefinition} from "blockly/core/blocks";
 
 export class IncludeBlock extends CodeBlock {
     public static readonly IDENTIFIER: string = "core-include";
     public static readonly INCLUDE_PATH: string = "INCLUDE_PATH";
 
-    protected identifier(): string {
+    public identifier(): string {
         return IncludeBlock.IDENTIFIER;
     }
 
@@ -31,6 +33,7 @@ export class IncludeBlock extends CodeBlock {
         }
     }
 
+    // @ts-ignore
     protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
         const path = block.getFieldValue(IncludeBlock.INCLUDE_PATH);
 

@@ -1,5 +1,6 @@
 import {CodeBlock} from "../CodeBlock.ts";
 import * as Blockly from "blockly";
+// @ts-ignore
 import type {BlockDefinition} from "blockly/core/blocks";
 
 /**

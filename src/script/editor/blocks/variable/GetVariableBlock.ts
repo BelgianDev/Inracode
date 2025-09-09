@@ -1,7 +1,9 @@
 import {CodeBlock} from "../../CodeBlock.ts";
 import * as Blockly from "blockly";
+// @ts-ignore
 import type {CategoryInfo} from "blockly/core/utils/toolbox";
 import {Categories} from "../../Categories.ts";
+// @ts-ignore
 import type {BlockDefinition} from "blockly/core/blocks";
 import {Order} from "blockly/javascript";
 
@@ -9,7 +11,7 @@ export class GetVariableBlock extends CodeBlock {
     public static readonly IDENTIFIER: string = "var-get";
     public static readonly VAR_NAME: string = "VAR_NAME";
 
-    protected identifier(): string {
+    public identifier(): string {
         return GetVariableBlock.IDENTIFIER;
     }
 
@@ -29,6 +31,7 @@ export class GetVariableBlock extends CodeBlock {
         }
     }
 
+    // @ts-ignore
     protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
         const name = block.getFieldValue(GetVariableBlock.VAR_NAME);
         return [name, Order.NONE];

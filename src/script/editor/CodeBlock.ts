@@ -1,6 +1,8 @@
 import 'blockly/blocks'
 import * as Blockly from "blockly";
-import type {CategoryInfo, ToolboxItemInfo} from "blockly/core/utils/toolbox";
+// @ts-ignore
+import type {CategoryInfo} from "blockly/core/utils/toolbox";
+// @ts-ignore
 import type {BlockDefinition} from "blockly/core/blocks";
 import {cppGenerator} from "./CPPGenerator.ts";
 import {StandardBlock} from "./blocks/StandardBlock.ts";

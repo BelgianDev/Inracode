@@ -1,7 +1,9 @@
 import {CodeBlock} from "../../../CodeBlock.ts";
 import * as Blockly from "blockly";
+// @ts-ignore
 import type {CategoryInfo} from "blockly/core/utils/toolbox";
 import {Categories} from "../../../Categories.ts";
+// @ts-ignore
 import type {BlockDefinition} from "blockly/core/blocks";
 import {Order} from "blockly/javascript";
 import {NumberBlock} from "../../variable/NumberBlock.ts";
@@ -10,7 +12,7 @@ export class GpioDigitalReadBlock extends CodeBlock {
     public static readonly IDENTIFIER: string = "m5-gpio-digital-read";
     public static readonly PIN_NUMBER: string = "PIN_NUMBER";
 
-    protected identifier(): string {
+    public identifier(): string {
         return GpioDigitalReadBlock.IDENTIFIER;
     }
 

@@ -1,13 +1,15 @@
 import {CodeBlock} from "../../CodeBlock.ts";
-import * as Blockly from "blockly";
+import * as Blockly from "blockly"
+// @ts-ignore
 import type {CategoryInfo} from "blockly/core/utils/toolbox";
 import {Categories} from "../../Categories.ts";
+// @ts-ignore
 import type {BlockDefinition} from "blockly/core/blocks";
 
 export class BeginBlock extends CodeBlock {
     public static readonly IDENTIFIER: string = "m5-begin";
 
-    protected identifier(): string {
+    public identifier(): string {
         return BeginBlock.IDENTIFIER;
     }
 
@@ -27,6 +29,7 @@ export class BeginBlock extends CodeBlock {
         }
     }
 
+    // @ts-ignore
     protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
         return "M5.begin();";
     }

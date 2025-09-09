@@ -1,4 +1,5 @@
 import {StandardBlock} from "../StandardBlock.ts";
+// @ts-ignore
 import type {CategoryInfo} from "blockly/core/utils/toolbox";
 import * as Blockly from 'blockly';
 import {Categories} from "../../Categories.ts";
@@ -9,7 +10,7 @@ export class ForILoopBlock extends StandardBlock {
     public static readonly TIMES: string = "TIMES";
     public static readonly STATEMENT: string = "DO";
 
-    protected identifier(): string {
+    public identifier(): string {
         return ForILoopBlock.IDENTIFIER;
     }
 

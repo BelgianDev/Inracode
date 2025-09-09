@@ -1,7 +1,9 @@
 import {CodeBlock} from "../../../CodeBlock.ts";
 import * as Blockly from "blockly";
+// @ts-ignore
 import type {CategoryInfo} from "blockly/core/utils/toolbox";
 import {Categories} from "../../../Categories.ts";
+// @ts-ignore
 import type {BlockDefinition} from "blockly/core/blocks";
 import {Order} from "blockly/javascript";
 import {NumberBlock} from "../../variable/NumberBlock.ts";
@@ -11,7 +13,7 @@ export class LcdCursorBlock extends CodeBlock {
     public static readonly X: string = "X";
     public static readonly Y: string = "Y";
 
-    protected identifier(): string {
+    public identifier(): string {
         return LcdCursorBlock.IDENTIFIER;
     }
 

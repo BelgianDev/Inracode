@@ -1,4 +1,5 @@
 import {StandardBlock} from "../StandardBlock.ts";
+// @ts-ignore
 import type {CategoryInfo} from "blockly/core/utils/toolbox";
 import * as Blockly from 'blockly';
 import {Categories} from "../../Categories.ts";
@@ -10,7 +11,7 @@ export class IfBlock extends StandardBlock {
     public static readonly DO_MEMBER: string = "DO";
     public static readonly ELSE_MEMBER: string = "ELSE";
 
-    protected identifier(): string {
+    public identifier(): string {
         return IfBlock.IDENTIFIER;
     }
 

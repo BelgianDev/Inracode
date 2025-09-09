@@ -1,15 +1,15 @@
-import {StandardBlock} from "../StandardBlock.ts";
+// @ts-ignore
 import type {CategoryInfo} from "blockly/core/utils/toolbox";
 import * as Blockly from 'blockly';
 import {Categories} from "../../Categories.ts";
-import {Order} from "blockly/javascript";
 import {CodeBlock} from "../../CodeBlock.ts";
+// @ts-ignore
 import type {BlockDefinition} from "blockly/core/blocks";
 
 export class ReturnBlock extends CodeBlock {
     public static readonly IDENTIFIER: string = "controls_flow_return";
 
-    protected identifier(): string {
+    public identifier(): string {
         return ReturnBlock.IDENTIFIER;
     }
 
@@ -29,6 +29,7 @@ export class ReturnBlock extends CodeBlock {
         }
     }
 
+    // @ts-ignore
     protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
         return "return;";
     }

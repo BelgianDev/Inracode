@@ -1,4 +1,6 @@
+// @ts-ignore
 import type {CategoryInfo, ToolboxItemInfo} from "blockly/core/utils/toolbox";
+// @ts-ignore
 import type {CssConfig as CategoryCssConfig} from "blockly/core/toolbox/category";
 
 const toolbox: ToolboxItemInfo[] = [];

@@ -1,18 +1,19 @@
 import {CodeBlock} from "../../../CodeBlock.ts";
 import * as Blockly from "blockly";
+// @ts-ignore
 import type {CategoryInfo} from "blockly/core/utils/toolbox";
 import {Categories} from "../../../Categories.ts";
+// @ts-ignore
 import type {BlockDefinition} from "blockly/core/blocks";
 import {Order} from "blockly/javascript";
 import {NumberBlock} from "../../variable/NumberBlock.ts";
-import {BooleanBlock} from "../../variable/BooleanBlock.ts";
 
 export class GpioModeBlock extends CodeBlock {
     public static readonly IDENTIFIER: string = "m5-gpio-mode";
     public static readonly PIN_NUMBER: string = "PIN_NUMBER";
     public static readonly MODE: string = "MODE";
 
-    protected identifier(): string {
+    public identifier(): string {
         return GpioModeBlock.IDENTIFIER;
     }
 

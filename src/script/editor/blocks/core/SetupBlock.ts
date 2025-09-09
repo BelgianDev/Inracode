@@ -1,14 +1,16 @@
 import {CodeBlock} from "../../CodeBlock.ts";
 import {type Block, CodeGenerator} from "blockly";
+// @ts-ignore
 import type {CategoryInfo} from "blockly/core/utils/toolbox";
 import {Categories} from "../../Categories.ts";
+// @ts-ignore
 import type {BlockDefinition} from "blockly/core/blocks";
 
 export class SetupBlock extends CodeBlock {
     public static readonly IDENTIFIER: string = "core-setup";
     public static readonly MEMBERS: string = "MEMBERS";
 
-    protected identifier(): string {
+    public identifier(): string {
         return SetupBlock.IDENTIFIER;
     }
 

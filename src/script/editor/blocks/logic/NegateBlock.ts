@@ -1,4 +1,5 @@
 import {StandardBlock} from "../StandardBlock.ts";
+// @ts-ignore
 import type {CategoryInfo} from "blockly/core/utils/toolbox";
 import * as Blockly from 'blockly';
 import {Categories} from "../../Categories.ts";
@@ -8,7 +9,7 @@ export class NegateBlock extends StandardBlock {
     public static readonly IDENTIFIER: string = "logic_negate";
     public static readonly STATEMENT: string = "BOOL";
 
-    protected identifier(): string {
+    public identifier(): string {
         return NegateBlock.IDENTIFIER;
     }
 

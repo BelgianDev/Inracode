@@ -1,4 +1,5 @@
 import {StandardBlock} from "../StandardBlock.ts";
+// @ts-ignore
 import type {CategoryInfo} from "blockly/core/utils/toolbox";
 import * as Blockly from 'blockly';
 import {Categories} from "../../Categories.ts";
@@ -19,7 +20,7 @@ export class ArithmeticBlock extends StandardBlock {
     public static readonly ARGUMENT_A: string = "A";
     public static readonly ARGUMENT_B: string = "B";
 
-    protected identifier(): string {
+    public identifier(): string {
         return ArithmeticBlock.IDENTIFIER;
     }
 

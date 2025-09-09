@@ -13,6 +13,7 @@ export const useEditorStore = defineStore('editor-prefs', ()  => {
 
     function clearEditor() {
         if (workspace.value)
+            // @ts-ignore
             serialization.workspaces.load({}, workspace.value) // This will also clear the code variables
         else
             code.value = ""; // Still reset the code, if for some reason It's loaded but not the workspace.
@@ -39,6 +40,7 @@ export const useEditorStore = defineStore('editor-prefs', ()  => {
     }
 
     function serializeWorkspace(): any {
+        // @ts-ignore
         return serialization.workspaces.save(workspace.value)
     }
 

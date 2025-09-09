@@ -1,11 +1,12 @@
 import {CodeBlock} from "../../../CodeBlock.ts";
 import * as Blockly from "blockly";
+// @ts-ignore
 import type {CategoryInfo} from "blockly/core/utils/toolbox";
 import {Categories} from "../../../Categories.ts";
+// @ts-ignore
 import type {BlockDefinition} from "blockly/core/blocks";
 import {Order} from "blockly/javascript";
 import {TextBlock} from "../../variable/TextBlock.ts";
-import {GetVariableBlock} from "../../variable/GetVariableBlock.ts";
 
 export class SerialPrintFormatBlock extends CodeBlock {
     public static readonly IDENTIFIER: string = "m5-serial-print-format-";
@@ -19,7 +20,7 @@ export class SerialPrintFormatBlock extends CodeBlock {
         this.argNum = argNum;
     }
 
-    protected identifier(): string {
+    public identifier(): string {
         return SerialPrintFormatBlock.IDENTIFIER + this.argNum;
     }
 
