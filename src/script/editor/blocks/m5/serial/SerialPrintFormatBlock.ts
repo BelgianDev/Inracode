@@ -71,7 +71,7 @@ export class SerialPrintFormatBlock extends CodeBlock {
     protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
         const input = generator.valueToCode(block, SerialPrintFormatBlock.INPUT, Order.NONE);
 
-        let base = 'Serial.print(' + input + ', ';
+        let base = 'Serial.printf(' + input + ', ';
         for (let i = 0; i < this.argNum; i++) {
             const arg = generator.valueToCode(block, SerialPrintFormatBlock.ARGUMENT + i, Order.NONE);
             if (i === this.argNum - 1) {

@@ -71,7 +71,7 @@ export class LcdPrintFormatBlock extends CodeBlock {
     protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
         const input = generator.valueToCode(block, LcdPrintFormatBlock.INPUT, Order.NONE);
 
-        let base = 'M5.Lcd.print(' + input + ', ';
+        let base = 'M5.Lcd.printf(' + input + ', ';
         for (let i = 0; i < this.argNum; i++) {
             const arg = generator.valueToCode(block, LcdPrintFormatBlock.ARGUMENT + i, Order.NONE);
             if (i === this.argNum - 1) {

@@ -57,11 +57,6 @@ export class DefineVariableBlock extends CodeBlock {
         if (!value || value.length === 0)
             return type + ' ' + name + ';';
 
-        const isText = type === 'String'
-
-        if (!isText)
-            return type + " " + name + ' = ' + value + ';';
-
-        return type + ' ' + name + ' = "' + value + '";';
+        return type + " " + name + ' = ' + value + ';';
     }
 }
