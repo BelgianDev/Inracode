@@ -34,6 +34,8 @@ import {BreakBlock} from "./blocks/logic/BreakBlock.ts";
 import {ReturnBlock} from "./blocks/logic/ReturnBlock.ts";
 import {ContinueBlock} from "./blocks/logic/ContinueBlock.ts";
 import {WhileLoopBlock} from "./blocks/logic/WhileLoopBlock.ts";
+import {GpioAnalogReadBlock} from "./blocks/m5/gpio/GpioAnalogReadBlock.ts";
+import {DelayBlock} from "./blocks/core/DelayBlock.ts";
 
 const REGISTERED_BLOCKS: CodeBlock[] = [
     // Core
@@ -42,6 +44,7 @@ const REGISTERED_BLOCKS: CodeBlock[] = [
     new SetupBlock(),
     new LoopBlock(),
     new GlobalBlock(),
+    new DelayBlock(),
 
     // Logic
     new NegateBlock(),
@@ -83,6 +86,7 @@ const REGISTERED_BLOCKS: CodeBlock[] = [
     new GpioModeBlock(),
     new GpioDigitalWriteBlock(),
     new GpioDigitalReadBlock(),
+    new GpioAnalogReadBlock(),
 
     // M5 Serial
     new SerialPrintBlock(),
