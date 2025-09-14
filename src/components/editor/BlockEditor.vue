@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import {ref, onMounted, watch} from 'vue'
 import * as Blockly from 'blockly/core'
-import * as en from 'blockly/msg/en'
+import * as en from 'blockly/msg/en';
 import 'blockly/blocks'
 import {useEditorStore} from "../../script/editor/EditorStore.ts";
 import {Categories} from "../../script/editor/Categories.ts";
+//@ts-ignore
 import type {ToolboxDefinition} from "blockly/core/utils/toolbox";
 import {registerBlocks} from "../../script/editor/BlockRegistry.ts";
+//@ts-ignore
 import type {Abstract} from "blockly/core/events/events_abstract";
 import {cppGenerator} from "../../script/editor/CPPGenerator.ts";
 
@@ -35,10 +37,12 @@ async function generateCode(event?: Abstract) {
   if (!editorStore.workspace || !eventForCodeRegen.has(event.type))
     return;
 
+  //@ts-ignore
   if (editorStore.workspace.isDragging())
     return;
 
   console.log("Generating code...");
+  //@ts-ignore
   editorStore.code = cppGenerator.workspaceToCode(editorStore.workspace);
   await editorStore.saveWorkspace();
 }
@@ -47,6 +51,7 @@ watch(() => editorStore.dividerPos, () => {
   if (!editorStore.workspace)
     return;
 
+  // @ts-ignore
   Blockly.svgResize(editorStore.workspace);
 });
 
@@ -54,6 +59,7 @@ onMounted(() => {
   if (!blockEditor.value)
     return;
 
+  //@ts-ignore
   Blockly.setLocale(en);
 
   const editorOptions: Blockly.BlocklyOptions = {

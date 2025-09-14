@@ -25,7 +25,7 @@ const importedFile = ref<ProjectFile | null>(null);
 const showInvalidFileAlert = ref(false);
 
 const showInfoModal = ref(false);
-const version = __APP_VERSION__
+const version = __APP_VERSION__;
 
 const codeCopied = ref(false);
 async function onCopyClick() {
@@ -78,7 +78,8 @@ function clearProject() {
   })
 }
 
-async function handleProjectUpload(fileList: Array<{ file: File }>) {
+//@ts-ignore
+async function handleProjectUpload(fileList: Array<Required<NUpload.UploadFileInfo>>) {
   if (fileList.length === 0) {
     showInvalidFileAlert.value = false;
     return;
@@ -86,9 +87,16 @@ async function handleProjectUpload(fileList: Array<{ file: File }>) {
 
   const uploadedFile = fileList[0].file;
 
+  if (!uploadedFile) {
+    showInvalidFileAlert.value = true;
+    importedFile.value = null;
+    return;
+  }
+
   try {
     const text = await uploadedFile.text();
     importedFile.value = JSON.parse(text);
+    showInvalidFileAlert.value = false;
   } catch (error) {
     console.error('Error processing file:', error);
     showInvalidFileAlert.value = true;

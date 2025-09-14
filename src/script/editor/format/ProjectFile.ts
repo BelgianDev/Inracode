@@ -1,4 +1,4 @@
 export type ProjectFile = {
-    exportDate: String,
+    exportDate: string,
     data: any
 }
