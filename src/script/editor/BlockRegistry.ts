@@ -36,6 +36,12 @@ import {ContinueBlock} from "./blocks/logic/ContinueBlock.ts";
 import {WhileLoopBlock} from "./blocks/logic/WhileLoopBlock.ts";
 import {GpioAnalogReadBlock} from "./blocks/m5/gpio/GpioAnalogReadBlock.ts";
 import {DelayBlock} from "./blocks/core/DelayBlock.ts";
+import {DelayMicroBlock} from "./blocks/core/DelayMicroBlock.ts";
+import {LcdBrightnessBlock} from "./blocks/m5/lcd/LcdBrightnessBlock.ts";
+import {GpioLedcSetupBlock} from "./blocks/m5/gpio/GpioLedcSetupBlock.ts";
+import {GpioLedcAttachPinBlock} from "./blocks/m5/gpio/GpioLedcAttachPinBlock.ts";
+import {GpioLedcWriteBlock} from "./blocks/m5/gpio/GpioLedcWriteBlock.ts";
+import {GpioLedcDetachPinBlock} from "./blocks/m5/gpio/GpioLedcDetachPinBlock.ts";
 
 const REGISTERED_BLOCKS: CodeBlock[] = [
     // Core
@@ -45,6 +51,7 @@ const REGISTERED_BLOCKS: CodeBlock[] = [
     new LoopBlock(),
     new GlobalBlock(),
     new DelayBlock(),
+    new DelayMicroBlock(),
 
     // Logic
     new NegateBlock(),
@@ -75,6 +82,7 @@ const REGISTERED_BLOCKS: CodeBlock[] = [
     // M5 LCD
     new LcdCursorBlock(),
     new LcdTextSizeBlock(),
+    new LcdBrightnessBlock(),
     new LcdPrintBlock(),
     new LcdPrintLineBlock(),
     new LcdPrintFormatBlock(1),
@@ -87,6 +95,10 @@ const REGISTERED_BLOCKS: CodeBlock[] = [
     new GpioDigitalWriteBlock(),
     new GpioDigitalReadBlock(),
     new GpioAnalogReadBlock(),
+    new GpioLedcSetupBlock(),
+    new GpioLedcAttachPinBlock(),
+    new GpioLedcDetachPinBlock(),
+    new GpioLedcWriteBlock(),
 
     // M5 Serial
     new SerialPrintBlock(),

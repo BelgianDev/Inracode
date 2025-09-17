@@ -8,25 +8,27 @@ import type {BlockDefinition} from "blockly/core/blocks";
 import {Order} from "blockly/javascript";
 import {NumberBlock} from "../../variable/NumberBlock.ts";
 
-export class LcdTextSizeBlock extends CodeBlock {
-    public static readonly IDENTIFIER: string = "m5-lcd-size";
-    public static readonly SIZE: string = "SIZE";
+export class GpioLedcDetachPinBlock extends CodeBlock {
+    public static readonly IDENTIFIER: string = "m5-gpio-ledc-detach-pin";
+    public static readonly CHANNEL: string = "CHANNEL";
+    public static readonly PIN: string = "PIN";
 
     public identifier(): string {
-        return LcdTextSizeBlock.IDENTIFIER;
+        return GpioLedcDetachPinBlock.IDENTIFIER;
     }
 
     protected category(): CategoryInfo {
-        return Categories.M5STACK_LCD;
+        return Categories.M5STACK_GPIO;
     }
 
     protected definition(): BlockDefinition {
         return {
             init: function () {
-                this.appendValueInput(LcdTextSizeBlock.SIZE)
-                    .appendField('set LCD text size')
+                this.appendValueInput(GpioLedcDetachPinBlock.PIN)
+                    .appendField('ledc dettach pin')
                 this.setPreviousStatement(true, null);
                 this.setNextStatement(true, null);
+                this.setInputsInline(true)
                 this.setTooltip('');
                 this.setHelpUrl('');
             }
@@ -34,8 +36,10 @@ export class LcdTextSizeBlock extends CodeBlock {
     }
 
     protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
-        const size = generator.valueToCode(block, LcdTextSizeBlock.SIZE, Order.NONE);
-        return "M5.Lcd.setTextSize(" + size + ");";
+        const pinNumber = generator.valueToCode(block, GpioLedcDetachPinBlock.PIN, Order.NONE);
+        const channel = generator.valueToCode(block, GpioLedcDetachPinBlock.CHANNEL, Order.NONE);
+
+        return "ledcDetachPin(" + pinNumber + ", " + channel + ");"
     }
 
     protected fillCategory(category: CategoryInfo) {
@@ -43,7 +47,7 @@ export class LcdTextSizeBlock extends CodeBlock {
             kind: 'block',
             type: this.identifier(),
             inputs: {
-                [LcdTextSizeBlock.SIZE]: {
+                [GpioLedcDetachPinBlock.PIN]: {
                     "block": {
                         "type": NumberBlock.IDENTIFIER,
                         "fields": {

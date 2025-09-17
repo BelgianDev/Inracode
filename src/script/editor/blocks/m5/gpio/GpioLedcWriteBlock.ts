@@ -7,26 +7,31 @@ import {Categories} from "../../../Categories.ts";
 import type {BlockDefinition} from "blockly/core/blocks";
 import {Order} from "blockly/javascript";
 import {NumberBlock} from "../../variable/NumberBlock.ts";
+import {BooleanBlock} from "../../variable/BooleanBlock.ts";
 
-export class LcdTextSizeBlock extends CodeBlock {
-    public static readonly IDENTIFIER: string = "m5-lcd-size";
-    public static readonly SIZE: string = "SIZE";
+export class GpioLedcWriteBlock extends CodeBlock {
+    public static readonly IDENTIFIER: string = "m5-gpio-ledc-write";
+    public static readonly CHANNEL: string = "CHANNEL";
+    public static readonly DUTY: string = "DUTY";
 
     public identifier(): string {
-        return LcdTextSizeBlock.IDENTIFIER;
+        return GpioLedcWriteBlock.IDENTIFIER;
     }
 
     protected category(): CategoryInfo {
-        return Categories.M5STACK_LCD;
+        return Categories.M5STACK_GPIO;
     }
 
     protected definition(): BlockDefinition {
         return {
             init: function () {
-                this.appendValueInput(LcdTextSizeBlock.SIZE)
-                    .appendField('set LCD text size')
+                this.appendValueInput(GpioLedcWriteBlock.CHANNEL)
+                    .appendField('write to ledc channel')
+                this.appendValueInput(GpioLedcWriteBlock.DUTY)
+                    .appendField('duty')
                 this.setPreviousStatement(true, null);
                 this.setNextStatement(true, null);
+                this.setInputsInline(true)
                 this.setTooltip('');
                 this.setHelpUrl('');
             }
@@ -34,8 +39,10 @@ export class LcdTextSizeBlock extends CodeBlock {
     }
 
     protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
-        const size = generator.valueToCode(block, LcdTextSizeBlock.SIZE, Order.NONE);
-        return "M5.Lcd.setTextSize(" + size + ");";
+        const channel = generator.valueToCode(block, GpioLedcWriteBlock.CHANNEL, Order.NONE);
+        const duty = generator.valueToCode(block, GpioLedcWriteBlock.DUTY, Order.NONE);
+
+        return "ledcWrite(" + channel + ", " + duty + ");"
     }
 
     protected fillCategory(category: CategoryInfo) {
@@ -43,7 +50,15 @@ export class LcdTextSizeBlock extends CodeBlock {
             kind: 'block',
             type: this.identifier(),
             inputs: {
-                [LcdTextSizeBlock.SIZE]: {
+                [GpioLedcWriteBlock.CHANNEL]: {
+                    "block": {
+                        "type": NumberBlock.IDENTIFIER,
+                        "fields": {
+                            [NumberBlock.NUM]: 1
+                        }
+                    }
+                },
+                [GpioLedcWriteBlock.DUTY]: {
                     "block": {
                         "type": NumberBlock.IDENTIFIER,
                         "fields": {

@@ -1,41 +1,45 @@
-import {CodeBlock} from "../../../CodeBlock.ts";
+import {CodeBlock} from "../../CodeBlock.ts";
 import * as Blockly from "blockly";
 // @ts-ignore
 import type {CategoryInfo} from "blockly/core/utils/toolbox";
-import {Categories} from "../../../Categories.ts";
+import {Categories} from "../../Categories.ts";
 // @ts-ignore
 import type {BlockDefinition} from "blockly/core/blocks";
 import {Order} from "blockly/javascript";
-import {NumberBlock} from "../../variable/NumberBlock.ts";
+import {NumberBlock} from "../variable/NumberBlock.ts";
 
-export class LcdTextSizeBlock extends CodeBlock {
-    public static readonly IDENTIFIER: string = "m5-lcd-size";
-    public static readonly SIZE: string = "SIZE";
+export class DelayMicroBlock extends CodeBlock {
+    public static readonly IDENTIFIER: string = "core-delay-micro";
+    public static readonly DELAY: string = "DELAY";
 
     public identifier(): string {
-        return LcdTextSizeBlock.IDENTIFIER;
+        return DelayMicroBlock.IDENTIFIER;
     }
 
     protected category(): CategoryInfo {
-        return Categories.M5STACK_LCD;
+        return Categories.CORE;
     }
 
     protected definition(): BlockDefinition {
         return {
             init: function () {
-                this.appendValueInput(LcdTextSizeBlock.SIZE)
-                    .appendField('set LCD text size')
+                this.appendValueInput(DelayMicroBlock.DELAY)
+                    .appendField('Wait')
+                this.appendDummyInput()
+                    .appendField('microseconds')
                 this.setPreviousStatement(true, null);
                 this.setNextStatement(true, null);
                 this.setTooltip('');
                 this.setHelpUrl('');
+                this.setColour(225);
             }
         }
     }
 
+    // @ts-ignore
     protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
-        const size = generator.valueToCode(block, LcdTextSizeBlock.SIZE, Order.NONE);
-        return "M5.Lcd.setTextSize(" + size + ");";
+        const delay = generator.valueToCode(block, DelayMicroBlock.DELAY, Order.NONE);
+        return "delayMicroseconds(" + delay + ");";
     }
 
     protected fillCategory(category: CategoryInfo) {
@@ -43,11 +47,11 @@ export class LcdTextSizeBlock extends CodeBlock {
             kind: 'block',
             type: this.identifier(),
             inputs: {
-                [LcdTextSizeBlock.SIZE]: {
+                [DelayMicroBlock.DELAY]: {
                     "block": {
                         "type": NumberBlock.IDENTIFIER,
                         "fields": {
-                            [NumberBlock.NUM]: 1
+                            [NumberBlock.NUM]: 1000
                         }
                     }
                 }
