@@ -8,29 +8,33 @@ import type {BlockDefinition} from "blockly/core/blocks";
 import {Order} from "blockly/javascript";
 import {NumberBlock} from "../../variable/NumberBlock.ts";
 
-export class GpioLedcAttachPinBlock extends CodeBlock {
-    public static readonly IDENTIFIER: string = "m5-gpio-ledc-attach-pin";
-    public static readonly CHANNEL: string = "CHANNEL";
-    public static readonly PIN: string = "PIN";
+export class SpeakerBeepBlock extends CodeBlock {
+    public static readonly IDENTIFIER: string = "m5-speaker-beep";
+    public static readonly FREQ: string = "X";
+    public static readonly DURATION: string = "Y";
 
     public identifier(): string {
-        return GpioLedcAttachPinBlock.IDENTIFIER;
+        return SpeakerBeepBlock.IDENTIFIER;
     }
 
     protected category(): CategoryInfo {
-        return Categories.M5STACK_GPIO;
+        return Categories.M5STACK_SPEAKER;
     }
 
     protected definition(): BlockDefinition {
         return {
             init: function () {
-                this.appendValueInput(GpioLedcAttachPinBlock.PIN)
-                    .appendField('ledc attach pin')
-                this.appendValueInput(GpioLedcAttachPinBlock.CHANNEL)
-                    .appendField('with channel')
+                this.appendValueInput(SpeakerBeepBlock.FREQ)
+                    .setCheck('Number')
+                    .appendField('beep with pitch')
+                this.appendValueInput(SpeakerBeepBlock.DURATION)
+                    .setCheck('Number')
+                    .appendField('for');
+                this.appendDummyInput()
+                    .appendField('milliseconds');
+                this.setInputsInline(true)
                 this.setPreviousStatement(true, null);
                 this.setNextStatement(true, null);
-                this.setInputsInline(true)
                 this.setTooltip('');
                 this.setHelpUrl('');
             }
@@ -38,10 +42,10 @@ export class GpioLedcAttachPinBlock extends CodeBlock {
     }
 
     protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
-        const pinNumber = generator.valueToCode(block, GpioLedcAttachPinBlock.PIN, Order.NONE);
-        const channel = generator.valueToCode(block, GpioLedcAttachPinBlock.CHANNEL, Order.NONE);
+        const frequency = generator.valueToCode(block, SpeakerBeepBlock.FREQ, Order.NONE);
+        const duration = generator.valueToCode(block, SpeakerBeepBlock.DURATION, Order.NONE);
 
-        return "ledcAttachPin(" + pinNumber + ", " + channel + ");"
+        return "M5.Speaker.setBeep(" + frequency + ", " + duration + ");";
     }
 
     protected fillCategory(category: CategoryInfo) {
@@ -49,19 +53,19 @@ export class GpioLedcAttachPinBlock extends CodeBlock {
             kind: 'block',
             type: this.identifier(),
             inputs: {
-                [GpioLedcAttachPinBlock.CHANNEL]: {
+                [SpeakerBeepBlock.FREQ]: {
                     "block": {
                         "type": NumberBlock.IDENTIFIER,
                         "fields": {
-                            [NumberBlock.NUM]: 1
+                            [NumberBlock.NUM]: 900
                         }
                     }
                 },
-                [GpioLedcAttachPinBlock.PIN]: {
+                [SpeakerBeepBlock.DURATION]: {
                     "block": {
                         "type": NumberBlock.IDENTIFIER,
                         "fields": {
-                            [NumberBlock.NUM]: 1
+                            [NumberBlock.NUM]: 1000
                         }
                     }
                 }

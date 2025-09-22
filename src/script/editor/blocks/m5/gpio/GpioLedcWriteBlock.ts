@@ -7,7 +7,6 @@ import {Categories} from "../../../Categories.ts";
 import type {BlockDefinition} from "blockly/core/blocks";
 import {Order} from "blockly/javascript";
 import {NumberBlock} from "../../variable/NumberBlock.ts";
-import {BooleanBlock} from "../../variable/BooleanBlock.ts";
 
 export class GpioLedcWriteBlock extends CodeBlock {
     public static readonly IDENTIFIER: string = "m5-gpio-ledc-write";

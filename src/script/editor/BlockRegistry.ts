@@ -42,6 +42,8 @@ import {GpioLedcSetupBlock} from "./blocks/m5/gpio/GpioLedcSetupBlock.ts";
 import {GpioLedcAttachPinBlock} from "./blocks/m5/gpio/GpioLedcAttachPinBlock.ts";
 import {GpioLedcWriteBlock} from "./blocks/m5/gpio/GpioLedcWriteBlock.ts";
 import {GpioLedcDetachPinBlock} from "./blocks/m5/gpio/GpioLedcDetachPinBlock.ts";
+import {SpeakerMuteBlock} from "./blocks/m5/speaker/SpeakerMuteBlock.ts";
+import {SpeakerBeepBlock} from "./blocks/m5/speaker/SpeakerBeepBlock.ts";
 
 const REGISTERED_BLOCKS: CodeBlock[] = [
     // Core
@@ -106,7 +108,11 @@ const REGISTERED_BLOCKS: CodeBlock[] = [
     new SerialPrintFormatBlock(1),
     new SerialPrintFormatBlock(2),
     new SerialPrintFormatBlock(3),
-    new SerialPrintFormatBlock(4)
+    new SerialPrintFormatBlock(4),
+
+    // M5 Speaker
+    new SpeakerBeepBlock(),
+    new SpeakerMuteBlock()
 ];
 
 export function registerBlocks() {
