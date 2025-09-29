@@ -44,6 +44,9 @@ import {GpioLedcWriteBlock} from "./blocks/m5/gpio/GpioLedcWriteBlock.ts";
 import {GpioLedcDetachPinBlock} from "./blocks/m5/gpio/GpioLedcDetachPinBlock.ts";
 import {SpeakerMuteBlock} from "./blocks/m5/speaker/SpeakerMuteBlock.ts";
 import {SpeakerBeepBlock} from "./blocks/m5/speaker/SpeakerBeepBlock.ts";
+import {LcdCursorGetXBlock} from "./blocks/m5/lcd/LcdCursorGetXBlock.ts";
+import {LcdCursorGetYBlock} from "./blocks/m5/lcd/LcdCursorGetYBlock.ts";
+import {LcdClearDisplay} from "./blocks/m5/lcd/LcdClearDisplay.ts";
 
 const REGISTERED_BLOCKS: CodeBlock[] = [
     // Core
@@ -87,6 +90,9 @@ const REGISTERED_BLOCKS: CodeBlock[] = [
     new LcdBrightnessBlock(),
     new LcdPrintBlock(),
     new LcdPrintLineBlock(),
+    new LcdClearDisplay(),
+    new LcdCursorGetXBlock(),
+    new LcdCursorGetYBlock(),
     new LcdPrintFormatBlock(1),
     new LcdPrintFormatBlock(2),
     new LcdPrintFormatBlock(3),
