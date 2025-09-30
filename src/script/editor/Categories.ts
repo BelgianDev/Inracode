@@ -59,6 +59,7 @@ export class Categories {
 
     // Module Specific
     static readonly M5STACK = createRootCategory('M5Stack', 360);
+    static readonly M5STACK_BTN = Categories.M5STACK.createSubCategory('Button', 360);
     static readonly M5STACK_SERIAL = Categories.M5STACK.createSubCategory("Serial", 160);
     static readonly M5STACK_SPEAKER = Categories.M5STACK.createSubCategory('Speaker', 180);
     static readonly M5STACK_LCD = Categories.M5STACK.createSubCategory('LCD', 240);

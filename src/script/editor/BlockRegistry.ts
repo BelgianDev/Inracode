@@ -58,6 +58,15 @@ import {LcdFillCircleBlock} from "./blocks/m5/lcd/LcdFillCircleBlock.ts";
 import {LcdFillTriangleBlock} from "./blocks/m5/lcd/LcdFillTriangleBlock.ts";
 import {LcdDrawTriangleBlock} from "./blocks/m5/lcd/LcdDrawTriangleBlock.ts";
 import {LcdDrawLineBlock} from "./blocks/m5/lcd/LcdDrawLineBlock.ts";
+import {UpdateBlock} from "./blocks/m5/UpdateBlock.ts";
+import {ButtonWasReleaseForBlock} from "./blocks/m5/button/ButtonWasReleaseForBlock.ts";
+import {ButtonIsPressedBlock} from "./blocks/m5/button/ButtonIsPressedBlock.ts";
+import {ButtonWasPressedBlock} from "./blocks/m5/button/ButtonWasPressedBlock.ts";
+import {ButtonPressedForBlock} from "./blocks/m5/button/ButtonPressedForBlock.ts";
+import {ButtonReadBlock} from "./blocks/m5/button/ButtonReadBlock.ts";
+import {ButtonLastChangeBlock} from "./blocks/m5/button/ButtonLastChangeBlock.ts";
+import {ButtonWasReleasedBlock} from "./blocks/m5/button/ButtonWasReleasedBlock.ts";
+import {ButtonReleasedForBlock} from "./blocks/m5/button/ButtonReleasedForBlock.ts";
 
 const REGISTERED_BLOCKS: CodeBlock[] = [
     // Core
@@ -96,6 +105,17 @@ const REGISTERED_BLOCKS: CodeBlock[] = [
 
     // M5
     new BeginBlock(),
+    new UpdateBlock(),
+
+    // M5 Buttons
+    new ButtonReadBlock(),
+    new ButtonIsPressedBlock(),
+    new ButtonPressedForBlock(),
+    new ButtonWasPressedBlock(),
+    new ButtonReleasedForBlock(),
+    new ButtonWasReleasedBlock(),
+    new ButtonWasReleaseForBlock(),
+    new ButtonLastChangeBlock(),
 
     // M5 LCD
     new LcdCursorBlock(),
