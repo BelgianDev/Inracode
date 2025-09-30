@@ -47,6 +47,7 @@ import {SpeakerBeepBlock} from "./blocks/m5/speaker/SpeakerBeepBlock.ts";
 import {LcdCursorGetXBlock} from "./blocks/m5/lcd/LcdCursorGetXBlock.ts";
 import {LcdCursorGetYBlock} from "./blocks/m5/lcd/LcdCursorGetYBlock.ts";
 import {LcdClearDisplay} from "./blocks/m5/lcd/LcdClearDisplay.ts";
+import {HexBlock} from "./blocks/variable/HexBlock.ts";
 
 const REGISTERED_BLOCKS: CodeBlock[] = [
     // Core
@@ -74,6 +75,7 @@ const REGISTERED_BLOCKS: CodeBlock[] = [
 
     // Variable
     new NullBlock(),
+    new HexBlock(),
     new NumberBlock(),
     new BooleanBlock(),
     new TextBlock(),

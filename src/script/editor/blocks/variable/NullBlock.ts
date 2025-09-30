@@ -6,7 +6,7 @@ import {Categories} from "../../Categories.ts";
 import {Order} from "blockly/javascript";
 
 export class NullBlock extends StandardBlock {
-    private static readonly IDENTIFIER: string = "logic_null";
+    public static readonly IDENTIFIER: string = "logic_null";
 
     public identifier(): string {
         return NullBlock.IDENTIFIER;
