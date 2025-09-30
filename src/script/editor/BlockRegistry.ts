@@ -48,6 +48,16 @@ import {LcdCursorGetXBlock} from "./blocks/m5/lcd/LcdCursorGetXBlock.ts";
 import {LcdCursorGetYBlock} from "./blocks/m5/lcd/LcdCursorGetYBlock.ts";
 import {LcdClearDisplay} from "./blocks/m5/lcd/LcdClearDisplay.ts";
 import {HexBlock} from "./blocks/variable/HexBlock.ts";
+import {ColorBlock} from "./blocks/variable/ColorBlock.ts";
+import {LcdTextColorBlock} from "./blocks/m5/lcd/LcdTextColorBlock.ts";
+import {LcdFillScreenBlock} from "./blocks/m5/lcd/LcdFillScreenBlock.ts";
+import {LcdDrawRectBlock} from "./blocks/m5/lcd/LcdDrawRectBlock.ts";
+import {LcdFillRectBlock} from "./blocks/m5/lcd/LcdFillRectBlock.ts";
+import {LcdDrawCircleBlock} from "./blocks/m5/lcd/LcdDrawCircleBlock.ts";
+import {LcdFillCircleBlock} from "./blocks/m5/lcd/LcdFillCircleBlock.ts";
+import {LcdFillTriangleBlock} from "./blocks/m5/lcd/LcdFillTriangleBlock.ts";
+import {LcdDrawTriangleBlock} from "./blocks/m5/lcd/LcdDrawTriangleBlock.ts";
+import {LcdDrawLineBlock} from "./blocks/m5/lcd/LcdDrawLineBlock.ts";
 
 const REGISTERED_BLOCKS: CodeBlock[] = [
     // Core
@@ -79,6 +89,7 @@ const REGISTERED_BLOCKS: CodeBlock[] = [
     new NumberBlock(),
     new BooleanBlock(),
     new TextBlock(),
+    new ColorBlock(),
     new GetVariableBlock(),
     new DefineVariableBlock(),
     new SetVariableBlock(),
@@ -89,16 +100,25 @@ const REGISTERED_BLOCKS: CodeBlock[] = [
     // M5 LCD
     new LcdCursorBlock(),
     new LcdTextSizeBlock(),
+    new LcdTextColorBlock(),
     new LcdBrightnessBlock(),
     new LcdPrintBlock(),
     new LcdPrintLineBlock(),
     new LcdClearDisplay(),
     new LcdCursorGetXBlock(),
     new LcdCursorGetYBlock(),
+    new LcdFillScreenBlock(),
     new LcdPrintFormatBlock(1),
     new LcdPrintFormatBlock(2),
     new LcdPrintFormatBlock(3),
     new LcdPrintFormatBlock(4),
+    new LcdDrawLineBlock(),
+    new LcdDrawRectBlock(),
+    new LcdFillRectBlock(),
+    new LcdDrawCircleBlock(),
+    new LcdFillCircleBlock(),
+    new LcdDrawTriangleBlock(),
+    new LcdFillTriangleBlock(),
 
     // M5 GPIO
     new GpioModeBlock(),
