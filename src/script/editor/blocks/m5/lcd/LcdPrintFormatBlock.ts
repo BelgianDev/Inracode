@@ -25,7 +25,7 @@ export class LcdPrintFormatBlock extends CodeBlock {
     }
 
     protected category(): CategoryInfo {
-        return Categories.M5STACK_LCD;
+        return Categories.M5STACK_LCD_TEXT;
     }
 
     protected definition(): BlockDefinition {

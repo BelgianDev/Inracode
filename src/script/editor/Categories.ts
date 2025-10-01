@@ -63,6 +63,8 @@ export class Categories {
     static readonly M5STACK_SERIAL = Categories.M5STACK.createSubCategory("Serial", 160);
     static readonly M5STACK_SPEAKER = Categories.M5STACK.createSubCategory('Speaker', 180);
     static readonly M5STACK_LCD = Categories.M5STACK.createSubCategory('LCD', 240);
+    static readonly M5STACK_LCD_TEXT = Categories.M5STACK_LCD.createSubCategory('Text', 240);
+    static readonly M5STACK_LCD_GRAPHICS = Categories.M5STACK_LCD.createSubCategory('Graphics', 240);
     static readonly M5STACK_GPIO = Categories.M5STACK.createSubCategory('GPIO', 120);
 
     static asToolboxContent(): ToolboxItemInfo[] {
