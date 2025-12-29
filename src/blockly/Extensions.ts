@@ -149,7 +149,7 @@ const SWITCH_MUTATOR_MIXIN = {
             statementConnections[i]?.reconnect(this, ActualSwitchBlock.DO_MEMBER + i);
         }
 
-        defaultStatementConnection?.reconnect(this, SwitchDefaultBlock.IDENTIFIER);
+        defaultStatementConnection?.reconnect(this, ActualSwitchBlock.DEFAULT_MEMBER);
     }
 }
 
