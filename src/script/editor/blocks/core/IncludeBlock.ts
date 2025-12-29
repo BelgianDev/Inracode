@@ -37,7 +37,6 @@ export class IncludeBlock extends CodeBlock {
                 this.setNextStatement(true, null);
                 this.setTooltip('');
                 this.setHelpUrl('');
-                this.setColour(225);
             }
         }
     }

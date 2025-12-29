@@ -24,14 +24,13 @@ export class DelayBlock extends CodeBlock {
         return {
             init: function () {
                 this.appendValueInput(DelayBlock.DELAY)
-                    .appendField('Wait')
+                    .appendField('wait')
                 this.appendDummyInput()
                     .appendField('milliseconds')
                 this.setPreviousStatement(true, null);
                 this.setNextStatement(true, null);
                 this.setTooltip('');
                 this.setHelpUrl('');
-                this.setColour(225);
             }
         }
     }

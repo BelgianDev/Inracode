@@ -5,8 +5,8 @@ import type {CssConfig as CategoryCssConfig} from "blockly/core/toolbox/category
 
 const toolbox: ToolboxItemInfo[] = [];
 
-function createRootCategory(name: string, color: number, appendSpace: boolean = false): Category {
-    const category: Category = new Category(name, color);
+function createRootCategory(identifier: string, name: string, appendSpace: boolean = false): Category {
+    const category: Category = new Category(identifier, name);
 
     toolbox.push(category);
     if (appendSpace)
@@ -22,50 +22,40 @@ function createSpacing(): ToolboxItemInfo {
 class Category implements CategoryInfo {
     kind: 'category';
     name: string;
-    colour: number;
     contents: ToolboxItemInfo[];
-    id: string | undefined;
-    categorystyle: string | undefined;
-    cssconfig: CategoryCssConfig | undefined;
-    hidden: string | undefined;
-    expanded?: string | boolean;
+    categorystyle: string;
+    identifier: string;
 
-    constructor(name: string, colour: number) {
+    constructor(identifier: string, name: string) {
         this.kind = 'category';
         this.name = name;
-        this.colour = colour;
+        this.identifier = identifier;
+        this.categorystyle = identifier;
         this.contents = [];
-
-        // Blockly managed properties
-        this.id = undefined;
-        this.categorystyle = undefined;
-        this.cssconfig = undefined;
-        this.hidden = undefined;
-        this.expanded = undefined;
     }
 
-    public createSubCategory(name: string, color: number): Category {
-        const subCategory = new Category(name, color);
+    public createSubCategory(identifier: string, name: string): Category {
+        const subCategory = new Category(this.identifier + "_" + identifier, name);
         this.contents.push(subCategory);
         return subCategory;
     }
 }
 
 export class Categories {
-    static readonly CORE = createRootCategory('Core', 60);
-    static readonly LOGIC = createRootCategory('Logic', 120);
-    static readonly MATH = createRootCategory('Math', 180);
-    static readonly VARIABLE = createRootCategory('Variable', 230, true);
+    static readonly CORE = createRootCategory('core', 'Core');
+    static readonly LOGIC = createRootCategory('logic', 'Logic');
+    static readonly MATH = createRootCategory('math', 'Math');
+    static readonly VARIABLE = createRootCategory('variable', 'Variable', true);
 
     // Module Specific
-    static readonly M5STACK = createRootCategory('M5Stack', 360);
-    static readonly M5STACK_BTN = Categories.M5STACK.createSubCategory('Button', 360);
-    static readonly M5STACK_SERIAL = Categories.M5STACK.createSubCategory("Serial", 160);
-    static readonly M5STACK_SPEAKER = Categories.M5STACK.createSubCategory('Speaker', 180);
-    static readonly M5STACK_LCD = Categories.M5STACK.createSubCategory('LCD', 240);
-    static readonly M5STACK_LCD_TEXT = Categories.M5STACK_LCD.createSubCategory('Text', 240);
-    static readonly M5STACK_LCD_GRAPHICS = Categories.M5STACK_LCD.createSubCategory('Graphics', 240);
-    static readonly M5STACK_GPIO = Categories.M5STACK.createSubCategory('GPIO', 120);
+    static readonly M5STACK = createRootCategory('stack', 'M5Stack');
+    static readonly M5STACK_BTN = Categories.M5STACK.createSubCategory('button', 'Button');
+    static readonly M5STACK_SERIAL = Categories.M5STACK.createSubCategory('serial', 'Serial');
+    static readonly M5STACK_SPEAKER = Categories.M5STACK.createSubCategory('speaker', 'Speaker');
+    static readonly M5STACK_LCD = Categories.M5STACK.createSubCategory('lcd', 'LCD');
+    static readonly M5STACK_LCD_TEXT = Categories.M5STACK_LCD.createSubCategory('text', 'Text');
+    static readonly M5STACK_LCD_GRAPHICS = Categories.M5STACK_LCD.createSubCategory('graphics', 'Graphics');
+    static readonly M5STACK_GPIO = Categories.M5STACK.createSubCategory('gpio', 'GPIO');
 
     static asToolboxContent(): ToolboxItemInfo[] {
         return toolbox;

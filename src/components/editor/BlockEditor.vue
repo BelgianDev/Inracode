@@ -12,6 +12,8 @@ import {registerBlocks} from "../../script/editor/BlockRegistry.ts";
 import type {Abstract} from "blockly/core/events/events_abstract";
 import {cppGenerator} from "../../script/editor/CPPGenerator.ts";
 
+import { theme } from "../../blockly/theme.ts"
+
 const editorStore = useEditorStore();
 const blockEditor = ref<HTMLElement>();
 
@@ -74,7 +76,8 @@ onMounted(() => {
       scrollbars: true,
     },
     trashcan: true,
-    toolbox: initializeToolbox()
+    toolbox: initializeToolbox(),
+    theme: theme
   }
 
   editorStore.workspace = Blockly.inject(blockEditor.value, editorOptions);

@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource/inter": "^5.2.8",
     "@vicons/tabler": "^0.13.0",
     "blockly": "^12.1.0",
     "highlight.js": "^11.11.1",

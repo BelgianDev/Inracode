@@ -50,7 +50,7 @@ export abstract class CodeBlock {
         const defInit = def.init;
         def.init = function (this: Blockly.Block) {
             defInit.call(this);
-            this.setColour(category.colour); // Inject the category color
+            this.setStyle(category.categorystyle)
         };
 
         cppGenerator.forBlock[identifier] = (block, generator) => this.generateCode(block, generator);
