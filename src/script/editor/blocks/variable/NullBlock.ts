@@ -1,7 +1,7 @@
 import {StandardBlock} from "../StandardBlock.ts";
 // @ts-ignore
 import type {CategoryInfo} from "blockly/core/utils/toolbox";
-import * as Blockly from 'blockly';
+import * as Blockly from 'blockly/core';
 import {Categories} from "../../Categories.ts";
 import {Order} from "blockly/javascript";
 

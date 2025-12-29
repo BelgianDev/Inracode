@@ -13,7 +13,7 @@ import type {Abstract} from "blockly/core/events/events_abstract";
 import {cppGenerator} from "../../script/editor/CPPGenerator.ts";
 
 // Blocky Extensions
-import { theme } from "../../blockly/theme.ts"
+import { theme } from "../../blockly/Theme.ts"
 import '@blockly/toolbox-search';
 import { CrossTabCopyPaste } from '@blockly/plugin-cross-tab-copy-paste';
 

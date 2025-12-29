@@ -67,6 +67,12 @@ import {ButtonReadBlock} from "./blocks/m5/button/ButtonReadBlock.ts";
 import {ButtonLastChangeBlock} from "./blocks/m5/button/ButtonLastChangeBlock.ts";
 import {ButtonWasReleasedBlock} from "./blocks/m5/button/ButtonWasReleasedBlock.ts";
 import {ButtonReleasedForBlock} from "./blocks/m5/button/ButtonReleasedForBlock.ts";
+import {SwitchBlock} from "./blocks/logic/SwitchBlock.ts";
+
+import "../../blockly/Extensions.ts"
+import {SwitchCaseBlock} from "./blocks/mutator/switch/SwitchCaseBlock.ts";
+import {SwitchHeadBlock} from "./blocks/mutator/switch/SwitchHeadBlock.ts";
+import {SwitchDefaultBlock} from "./blocks/mutator/switch/SwitchDefaultBlock.ts";
 
 const REGISTERED_BLOCKS: CodeBlock[] = [
     // Core
@@ -83,6 +89,7 @@ const REGISTERED_BLOCKS: CodeBlock[] = [
     new CompareBlock(),
     new OperationBlock(),
     new IfBlock(),
+    new SwitchBlock(),
     new ForILoopBlock(),
     new WhileLoopBlock(),
     new ReturnBlock(),
@@ -160,7 +167,12 @@ const REGISTERED_BLOCKS: CodeBlock[] = [
 
     // M5 Speaker
     new SpeakerBeepBlock(),
-    new SpeakerMuteBlock()
+    new SpeakerMuteBlock(),
+
+    // Mutators
+    new SwitchHeadBlock(),
+    new SwitchCaseBlock(),
+    new SwitchDefaultBlock()
 ];
 
 export function registerBlocks() {

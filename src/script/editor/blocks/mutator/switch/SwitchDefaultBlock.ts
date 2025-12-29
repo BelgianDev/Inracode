@@ -1,16 +1,15 @@
 // @ts-ignore
 import type {CategoryInfo} from "blockly/core/utils/toolbox";
-import * as Blockly from 'blockly/core';
-import {Categories} from "../../Categories.ts";
-import {CodeBlock} from "../../CodeBlock.ts";
+import {Categories} from "../../../Categories.ts";
 // @ts-ignore
 import type {BlockDefinition} from "blockly/core/blocks";
+import {MutatorBlock} from "../MutatorBlock.ts";
 
-export class BreakBlock extends CodeBlock {
-    public static readonly IDENTIFIER: string = "controls_flow_break";
+export class SwitchDefaultBlock extends MutatorBlock {
+    public static readonly IDENTIFIER: string = "switch-default";
 
     public identifier(): string {
-        return BreakBlock.IDENTIFIER;
+        return SwitchDefaultBlock.IDENTIFIER;
     }
 
     protected category(): CategoryInfo {
@@ -20,17 +19,12 @@ export class BreakBlock extends CodeBlock {
     protected definition(): BlockDefinition {
         return {
             init: function () {
-                this.appendDummyInput('').appendField('break');
+                this.appendDummyInput('').appendField('default');
                 this.setPreviousStatement(true, null);
                 this.setNextStatement(false, null);
                 this.setTooltip('');
                 this.setHelpUrl('');
             }
         }
-    }
-
-    // @ts-ignore
-    protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
-        return "break;";
     }
 }

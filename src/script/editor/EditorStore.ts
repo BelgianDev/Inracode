@@ -16,7 +16,7 @@ export const useEditorStore = defineStore('editor-prefs', ()  => {
             // @ts-ignore
             serialization.workspaces.load({}, workspace.value) // This will also clear the code variables
         else
-            code.value = ""; // Still reset the code, if for some reason It's loaded but not the workspace.
+            code.value = ""; // Still reset the code if for some reason it's loaded but not the workspace.
 
         console.log("Cleared editor.");
     }
