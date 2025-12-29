@@ -9,6 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@blockly/plugin-cross-tab-copy-paste": "^8.0.4",
+    "@blockly/toolbox-search": "^3.1.5",
     "@fontsource/inter": "^5.2.8",
     "@vicons/tabler": "^0.13.0",
     "blockly": "^12.1.0",

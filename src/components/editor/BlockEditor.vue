@@ -12,7 +12,10 @@ import {registerBlocks} from "../../script/editor/BlockRegistry.ts";
 import type {Abstract} from "blockly/core/events/events_abstract";
 import {cppGenerator} from "../../script/editor/CPPGenerator.ts";
 
+// Blocky Extensions
 import { theme } from "../../blockly/theme.ts"
+import '@blockly/toolbox-search';
+import { CrossTabCopyPaste } from '@blockly/plugin-cross-tab-copy-paste';
 
 const editorStore = useEditorStore();
 const blockEditor = ref<HTMLElement>();
@@ -79,6 +82,14 @@ onMounted(() => {
     toolbox: initializeToolbox(),
     theme: theme
   }
+
+  const copyOptions: any = {
+    contextMenu: true,
+    shortcut: true,
+  }
+
+  const copyPastePlugin = new CrossTabCopyPaste();
+  copyPastePlugin.init(copyOptions, () => console.error('Failed to paste clip board contents!'))
 
   editorStore.workspace = Blockly.inject(blockEditor.value, editorOptions);
   editorStore.workspace.addChangeListener(generateCode);

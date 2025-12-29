@@ -72,9 +72,9 @@ const REGISTERED_BLOCKS: CodeBlock[] = [
     // Core
     new IncludeBlock(),
     new DefineBlock(),
+    new GlobalBlock(),
     new SetupBlock(),
     new LoopBlock(),
-    new GlobalBlock(),
     new DelayBlock(),
     new DelayMicroBlock(),
 

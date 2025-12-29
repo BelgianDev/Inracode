@@ -3,7 +3,12 @@ import type {CategoryInfo, ToolboxItemInfo} from "blockly/core/utils/toolbox";
 // @ts-ignore
 import type {CssConfig as CategoryCssConfig} from "blockly/core/toolbox/category";
 
-const toolbox: ToolboxItemInfo[] = [];
+const toolbox: ToolboxItemInfo[] = [
+    {
+        kind: 'search',
+        name: 'Search',
+    }
+];
 
 function createRootCategory(identifier: string, name: string, appendSpace: boolean = false): Category {
     const category: Category = new Category(identifier, name);
