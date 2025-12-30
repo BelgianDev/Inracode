@@ -68,11 +68,20 @@ import {ButtonLastChangeBlock} from "./blocks/m5/button/ButtonLastChangeBlock.ts
 import {ButtonWasReleasedBlock} from "./blocks/m5/button/ButtonWasReleasedBlock.ts";
 import {ButtonReleasedForBlock} from "./blocks/m5/button/ButtonReleasedForBlock.ts";
 import {SwitchBlock} from "./blocks/logic/SwitchBlock.ts";
-
-import "../../blockly/Extensions.ts"
 import {SwitchCaseBlock} from "./blocks/mutator/switch/SwitchCaseBlock.ts";
 import {SwitchHeadBlock} from "./blocks/mutator/switch/SwitchHeadBlock.ts";
 import {SwitchDefaultBlock} from "./blocks/mutator/switch/SwitchDefaultBlock.ts";
+import {CreateServoBlock} from "./blocks/servo/CreateServoBlock.ts";
+import {AttachServoBlock} from "./blocks/servo/AttachServoBlock.ts";
+
+import "../../blockly/Extensions.ts"
+import {AttachServoMinMaxBlock} from "./blocks/servo/AttachServoBlockMinMax.ts";
+import {DetachServoBlock} from "./blocks/servo/DetachServoBlock.ts";
+import {SetServoAngleBlock} from "./blocks/servo/SetServoAngleBlock.ts";
+import {SetServoAngleMicroBlock} from "./blocks/servo/SetServoAngleBlockMicro.ts";
+import {GetServoAngleBlock} from "./blocks/servo/GetServoAngleBlock.ts";
+import {GetServoMicroBlock} from "./blocks/servo/GetServoMicroBlock.ts";
+import {GetServoAttachedBlock} from "./blocks/servo/GetServoAttachedBlock.ts";
 
 const REGISTERED_BLOCKS: CodeBlock[] = [
     // Core
@@ -168,6 +177,17 @@ const REGISTERED_BLOCKS: CodeBlock[] = [
     // M5 Speaker
     new SpeakerBeepBlock(),
     new SpeakerMuteBlock(),
+
+    // ESP32 Servo
+    new CreateServoBlock(),
+    new AttachServoBlock(),
+    new AttachServoMinMaxBlock(),
+    new DetachServoBlock(),
+    new SetServoAngleBlock(),
+    new SetServoAngleMicroBlock(),
+    new GetServoAngleBlock(),
+    new GetServoMicroBlock(),
+    new GetServoAttachedBlock(),
 
     // Mutators
     new SwitchHeadBlock(),

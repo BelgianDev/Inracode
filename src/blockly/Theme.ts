@@ -45,6 +45,9 @@ export const theme = Theme.defineTheme("inracode", {
         stack_gpio: {
             colourPrimary: "#d60e0e"
         },
+        servo: {
+            colourPrimary: "#2433d3"
+        }
     },
     categoryStyles: {
         core: {
@@ -83,5 +86,8 @@ export const theme = Theme.defineTheme("inracode", {
         stack_gpio: {
             colour: "#d60e0e"
         },
+        servo: {
+            colour: "#2433d3"
+        }
     }
 })
