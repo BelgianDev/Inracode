@@ -50,7 +50,7 @@ export class ButtonPressedForBlock extends CodeBlock {
         const button = block.getFieldValue(ButtonPressedForBlock.BUTTON);
         const duration = generator.valueToCode(block, ButtonPressedForBlock.DURATION, Order.NONE);
 
-        return ["M5." + button + ".pressedFor(" + duration + ");", Order.NONE]
+        return ["M5." + button + ".pressedFor(" + duration + ")", Order.NONE]
     }
 
     protected fillCategory(category: CategoryInfo) {

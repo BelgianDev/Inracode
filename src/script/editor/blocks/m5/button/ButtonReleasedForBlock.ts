@@ -49,7 +49,7 @@ export class ButtonReleasedForBlock extends CodeBlock {
         const button = block.getFieldValue(ButtonReleasedForBlock.BUTTON);
         const duration = generator.valueToCode(block, ButtonReleasedForBlock.DURATION, Order.NONE);
 
-        return ["M5." + button + ".releasedFor(" + duration + ");", Order.NONE]
+        return ["M5." + button + ".releasedFor(" + duration + ")", Order.NONE]
     }
 
     protected fillCategory(category: CategoryInfo) {

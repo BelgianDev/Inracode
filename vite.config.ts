@@ -5,6 +5,7 @@ import { version } from './package.json';
 // https://vite.dev/config/
 export default defineConfig({
     plugins: [vue()],
+    base: './',
     define: {
         __APP_VERSION__: JSON.stringify(version), // Replace `__APP_VERSION__` at build-time
     }
