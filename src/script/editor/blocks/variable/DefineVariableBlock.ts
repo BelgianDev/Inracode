@@ -30,6 +30,7 @@ export class DefineVariableBlock extends CodeBlock {
                     .appendField('of type')
                     .appendField(new Blockly.FieldDropdown([
                         ['Boolean', 'bool'],
+                        ['Byte', 'byte'],
                         ['String', 'String'],
                         ['Character', 'signed char'],
                         ['Unsigned Character', 'unsigned char'],

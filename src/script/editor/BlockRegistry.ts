@@ -82,6 +82,7 @@ import {SetServoAngleMicroBlock} from "./blocks/servo/SetServoAngleBlockMicro.ts
 import {GetServoAngleBlock} from "./blocks/servo/GetServoAngleBlock.ts";
 import {GetServoMicroBlock} from "./blocks/servo/GetServoMicroBlock.ts";
 import {GetServoAttachedBlock} from "./blocks/servo/GetServoAttachedBlock.ts";
+import {BinaryBlock} from "./blocks/variable/BinaryBlock.ts";
 
 const REGISTERED_BLOCKS: CodeBlock[] = [
     // Core
@@ -111,6 +112,7 @@ const REGISTERED_BLOCKS: CodeBlock[] = [
     // Variable
     new NullBlock(),
     new HexBlock(),
+    new BinaryBlock(),
     new NumberBlock(),
     new BooleanBlock(),
     new TextBlock(),
