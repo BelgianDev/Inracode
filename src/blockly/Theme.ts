@@ -47,6 +47,9 @@ export const theme = Theme.defineTheme("inracode", {
         },
         servo: {
             colourPrimary: "#2433d3"
+        },
+        sensors: {
+            colourPrimary: "#8d0ed6"
         }
     },
     categoryStyles: {
@@ -88,6 +91,9 @@ export const theme = Theme.defineTheme("inracode", {
         },
         servo: {
             colour: "#2433d3"
+        },
+        sensors: {
+            colour: "#8d0ed6"
         }
     }
 })

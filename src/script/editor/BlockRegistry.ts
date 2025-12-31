@@ -83,6 +83,9 @@ import {GetServoAngleBlock} from "./blocks/servo/GetServoAngleBlock.ts";
 import {GetServoMicroBlock} from "./blocks/servo/GetServoMicroBlock.ts";
 import {GetServoAttachedBlock} from "./blocks/servo/GetServoAttachedBlock.ts";
 import {BinaryBlock} from "./blocks/variable/BinaryBlock.ts";
+import {CreateDistanceSensor} from "./blocks/sensor/CreateDistanceSensorBlock.ts";
+import {CreateDistanceSensorMaxBlock} from "./blocks/sensor/CreateDistanceSensorMaxBlock.ts";
+import {GetSensorDistanceBlock} from "./blocks/sensor/GetSensorDistanceBlock.ts";
 
 const REGISTERED_BLOCKS: CodeBlock[] = [
     // Core
@@ -190,6 +193,11 @@ const REGISTERED_BLOCKS: CodeBlock[] = [
     new GetServoAngleBlock(),
     new GetServoMicroBlock(),
     new GetServoAttachedBlock(),
+
+    // Sensors
+    new CreateDistanceSensor(),
+    new CreateDistanceSensorMaxBlock(),
+    new GetSensorDistanceBlock(),
 
     // Mutators
     new SwitchHeadBlock(),

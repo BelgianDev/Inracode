@@ -65,6 +65,9 @@ export class Categories {
     // ESP32 Servo
     static readonly ESP32_SERVO = createRootCategory('servo', 'Servo');
 
+    // Sensors
+    static readonly SENSORS = createRootCategory('sensors', 'Sensors');
+
     static asToolboxContent(): ToolboxItemInfo[] {
         return toolbox;
     }
