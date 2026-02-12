@@ -62,11 +62,14 @@ export class Categories {
     static readonly M5STACK_LCD_GRAPHICS = Categories.M5STACK_LCD.createSubCategory('graphics', 'Graphics');
     static readonly M5STACK_GPIO = Categories.M5STACK.createSubCategory('gpio', 'GPIO');
 
-    // ESP32 Servo
+    // Servo
     static readonly ESP32_SERVO = createRootCategory('servo', 'Servo');
 
     // Sensors
     static readonly SENSORS = createRootCategory('sensors', 'Sensors');
+
+    // LEDs
+    static readonly NEO_PIXEL_LED_STRIP = createRootCategory('led_strip', 'NeoPixel LED');
 
     static asToolboxContent(): ToolboxItemInfo[] {
         return toolbox;

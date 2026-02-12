@@ -28,6 +28,7 @@ import {LcdPrintFormatBlock} from "./blocks/m5/lcd/LcdPrintFormatBlock.ts";
 import {LcdPrintLineBlock} from "./blocks/m5/lcd/LcdPrintLineBlock.ts";
 import {SerialPrintLineBlock} from "./blocks/m5/serial/SerialPrintLineBlock.ts";
 import {ArithmeticBlock} from "./blocks/math/ArithmeticBlock.ts";
+import {BitOperatorBlock} from "./blocks/math/BitOperatorBlock.ts";
 import {GpioModeBlock} from "./blocks/m5/gpio/GpioModeBlock.ts";
 import {ForILoopBlock} from "./blocks/logic/ForILoopBlock.ts";
 import {BreakBlock} from "./blocks/logic/BreakBlock.ts";
@@ -86,6 +87,11 @@ import {BinaryBlock} from "./blocks/variable/BinaryBlock.ts";
 import {CreateDistanceSensor} from "./blocks/sensor/CreateDistanceSensorBlock.ts";
 import {CreateDistanceSensorMaxBlock} from "./blocks/sensor/CreateDistanceSensorMaxBlock.ts";
 import {GetSensorDistanceBlock} from "./blocks/sensor/GetSensorDistanceBlock.ts";
+import {CreateLedStripBlock} from "./blocks/led/CreateLedStripBlock.ts";
+import {StartLedStripBlock} from "./blocks/led/StartLedStripBlock.ts";
+import {ClearLedStripBlock} from "./blocks/led/ClearLedStripBlock.ts";
+import {ShowLedStripBlock} from "./blocks/led/ShowLedStripBlock.ts";
+import {BrightnessLedStripBlock} from "./blocks/led/BrightnessLedStripBlock.ts";
 
 const REGISTERED_BLOCKS: CodeBlock[] = [
     // Core
@@ -111,6 +117,7 @@ const REGISTERED_BLOCKS: CodeBlock[] = [
 
     // Math
     new ArithmeticBlock(),
+    new BitOperatorBlock(),
 
     // Variable
     new NullBlock(),
@@ -202,7 +209,14 @@ const REGISTERED_BLOCKS: CodeBlock[] = [
     // Mutators
     new SwitchHeadBlock(),
     new SwitchCaseBlock(),
-    new SwitchDefaultBlock()
+    new SwitchDefaultBlock(),
+
+    // LEDs
+    new CreateLedStripBlock(),
+    new StartLedStripBlock(),
+    new ClearLedStripBlock(),
+    new ShowLedStripBlock(),
+    new BrightnessLedStripBlock(),
 ];
 
 export function registerBlocks() {

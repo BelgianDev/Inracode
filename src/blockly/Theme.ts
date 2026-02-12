@@ -50,6 +50,9 @@ export const theme = Theme.defineTheme("inracode", {
         },
         sensors: {
             colourPrimary: "#8d0ed6"
+        },
+        led_strip: {
+            colourPrimary: "#10cde4"
         }
     },
     categoryStyles: {
@@ -94,6 +97,9 @@ export const theme = Theme.defineTheme("inracode", {
         },
         sensors: {
             colour: "#8d0ed6"
+        },
+        led_strip: {
+            colour: "#10cde4"
         }
     }
 })

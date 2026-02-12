@@ -10,39 +10,39 @@ import type {BlockDefinition} from "blockly/core/blocks";
 
 type OperatorOption = keyof typeof OPERATORS;
 const OPERATORS = {
-    'ADD': '+',
-    'MINUS': '-',
-    'MULTIPLY': '*',
-    'DIVIDE': '/',
-    'MODULO': '%'
+    'LEFT_SHIFT': '<<',
+    'RIGHT_SHIFT': '>>',
+    'OR': '|',
+    'AND': '&',
+    'XOR': '^',
 };
 
-export class ArithmeticBlock extends CodeBlock{
-    public static readonly IDENTIFIER: string = "math_arithmetic_modified";
+export class BitOperatorBlock extends CodeBlock{
+    public static readonly IDENTIFIER: string = "math_bit_operator";
     public static readonly OPERATOR: string = "OP";
     public static readonly ARGUMENT_A: string = "A";
     public static readonly ARGUMENT_B: string = "B";
 
     public identifier(): string {
-        return ArithmeticBlock.IDENTIFIER;
+        return BitOperatorBlock.IDENTIFIER;
     }
 
     protected definition(): BlockDefinition {
         return {
             init: function () {
-                this.appendValueInput(ArithmeticBlock.ARGUMENT_A)
+                this.appendValueInput(BitOperatorBlock.ARGUMENT_A)
                     .setAlign(Blockly.inputs.Align.CENTRE)
                     .setCheck('Number');
                 this.appendDummyInput("NAME")
                     .setAlign(Blockly.inputs.Align.CENTRE)
                     .appendField(new Blockly.FieldDropdown([
-                        ['+', 'ADD'],
-                        ['-', 'MINUS'],
-                        ['*', 'MULTIPLY'],
-                        ['/', 'DIVIDE'],
-                        ['%', 'MODULO']
-                    ]), ArithmeticBlock.OPERATOR);
-                this.appendValueInput(ArithmeticBlock.ARGUMENT_B)
+                        ['<<', 'LEFT_SHIFT'],
+                        ['>>', 'RIGHT_SHIFT'],
+                        ['|', 'OR'],
+                        ['&', 'AND'],
+                        ['^', 'XOR'],
+                    ]), BitOperatorBlock.OPERATOR);
+                this.appendValueInput(BitOperatorBlock.ARGUMENT_B)
                     .setAlign(Blockly.inputs.Align.CENTRE)
                     .setCheck('Number');
 
@@ -58,10 +58,10 @@ export class ArithmeticBlock extends CodeBlock{
     }
 
     protected generateCode(block: Blockly.Block, generator: Blockly.CodeGenerator): string | [string, number] {
-        const operator = OPERATORS[block.getFieldValue(ArithmeticBlock.OPERATOR) as OperatorOption];
+        const operator = OPERATORS[block.getFieldValue(BitOperatorBlock.OPERATOR) as OperatorOption];
 
-        const arg1 = generator.valueToCode(block, ArithmeticBlock.ARGUMENT_A, Order.NONE) || 0;
-        const arg2 = generator.valueToCode(block, ArithmeticBlock.ARGUMENT_B, Order.NONE) || 0;
+        const arg1 = generator.valueToCode(block, BitOperatorBlock.ARGUMENT_A, Order.NONE) || 0;
+        const arg2 = generator.valueToCode(block, BitOperatorBlock.ARGUMENT_B, Order.NONE) || 0;
 
         const code = arg1 + ' ' + operator + ' ' + arg2;
 
